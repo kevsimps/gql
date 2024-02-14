@@ -1,0 +1,41 @@
+.frame{
+    position: absolute;
+    z-index: 5;
+    /* height:25vh; */
+    height:229px;
+    background: #ccc;
+    left:40%;
+
+}
+label{
+    color: black
+}
+header{
+    background: black;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-top: 0;
+}
+.widgets{
+    padding: 10px;
+    margin-top: 20px;
+    
+}
+.title{
+    font-size: 1.5rem;
+}
+ select, input{
+    float:right;
+}
+.hideMe{
+    float: left;
+    margin-top: .25rem; 
+    cursor: pointer;    
+}
+.hidden{
+    display:none;
+}
+p{
+    margin: 1rem;
+}
