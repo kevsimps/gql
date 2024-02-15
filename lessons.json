@@ -1,4 +1,6 @@
 [
+    {"title":"Getting Started","address":"https://ciscolivelabs.github.io/wxcclabguides/gql/gettingStarted"},
+    {"title":"Placeholder","address":"https://ciscolivelabs.github.io/wxcclabguides/gql/placeholder"},
     {"title":"Preparing and validating your lab","address":"https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_0.html"},
     {"title":"Adding Callback Number Read Back","address":"https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_1.html"},
     {"title":"Reusing Our Existing Wait Treatment and Opt-out","address":"https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_2.html"},
