@@ -17,8 +17,8 @@ const wxccAltair = class {
 };
 wxccAltair.style = WxccAltairStyle0;
 
-const wxccAuthWidgetCss = ".frame{position:absolute;z-index:5;height:25vh;background:#ccc;left:20%;top:50%;padding:2em}h1{text-align:center}.hidden{display:none}";
-const WxccAuthWidgetStyle0 = wxccAuthWidgetCss;
+const wxccAuthDemoWidgetCss = ".frame{position:absolute;z-index:5;height:25vh;background:#ccc;left:20%;top:50%;padding:2em;width:60%}h1{text-align:center}.hidden{display:none}";
+const WxccAuthDemoWidgetStyle0 = wxccAuthDemoWidgetCss;
 
 const wxccAuth = class {
     constructor(hostRef) {
@@ -27,57 +27,72 @@ const wxccAuth = class {
         this.expStamp = undefined;
         this.hide = true;
         this.callbackUrl = undefined;
+        this.deets = undefined;
+        this.request = undefined;
+        this.showResponse = false;
     }
     async burp(x) {
         console.log(x);
         const code = x.slice(x.search("=") + 1, x.search("&"));
         // console.log(code)
         let myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
-        let urlencoded = new URLSearchParams();
-        urlencoded.append("grant_type", "authorization_code");
-        urlencoded.append("redirect_uri", this.callbackUrl);
-        urlencoded.append("client_id", "C1b249680a1788a109f1cd53c578c874a28a3e6468929598d4552d17d0a12f32f");
-        urlencoded.append("client_secret", "49aad1cd3ed0758755c69d818baf897923876854423dbc01d608fc8255d14044");
-        urlencoded.append("code", code);
+        myHeaders.append("Content-Type", "application/json");
+        // let urlencoded = new URLSearchParams();
+        // urlencoded.append("grant_type", "authorization_code")
+        // urlencoded.append("redirect_uri", this.callbackUrl)
+        // urlencoded.append("client_id", "C1b249680a1788a109f1cd53c578c874a28a3e6468929598d4552d17d0a12f32f")
+        // urlencoded.append("client_secret", "49aad1cd3ed0758755c69d818baf897923876854423dbc01d608fc8255d14044")
+        // urlencoded.append("code", code)
+        let urlencoded = { "grant_type": "authorization_code", "redirect_uri": this.callbackUrl, "client_id": "C1b249680a1788a109f1cd53c578c874a28a3e6468929598d4552d17d0a12f32f", "client_secret": "49aad1cd3ed0758755c69d818baf897923876854423dbc01d608fc8255d14044", "code": code };
         let requestOptions = {
             method: 'POST',
             headers: myHeaders,
-            body: urlencoded
+            body: JSON.stringify(urlencoded)
         };
         // console.log(urlencoded.toString())
+        this.request = urlencoded; //.toString() //.replace(/["&"]/g,"\r\n")
         let response = await fetch("https://webexapis.com/v1/access_token", requestOptions);
-        let deets = await response.json();
-        // console.log(deets)
-        this.token = "Bearer " + deets.access_token;
-        this.expStamp = new Date(Date.now() + (deets.expires_in * 1000));
-        sessionStorage.setItem("token", this.token);
-        sessionStorage.setItem("expStamp", this.expStamp);
+        this.deets = await response.json();
+        // console.log(await this.deets)
+        this.token = "Bearer " + this.deets.access_token;
+        this.expStamp = new Date(Date.now() + (this.deets.expires_in * 1000));
+        // sessionStorage.setItem("token", this.token)
+        // sessionStorage.setItem("expStamp", this.expStamp)
         // console.log(this.token)
         // console.log(this.expStamp)
         this.hide = false;
+        this.showResponse = false;
     }
     onGetAuth() {
         if (+new Date(sessionStorage.getItem("expStamp")) > Date.now()) {
             this.token = sessionStorage.getItem("token");
             this.hide = false;
+            this.showResponse = false;
         }
         else {
             window.open(`https://webexapis.com/v1/authorize?response_type=code&client_id=C1b249680a1788a109f1cd53c578c874a28a3e6468929598d4552d17d0a12f32f&state=new&scope=cjp%3Aconfig%20cjp%3Aconfig_read%20cjp%3Aconfig_write&redirect_uri=${this.callbackUrl}`, "steve", "popup");
         }
     }
     render() {
-        let tok = `{
-            "headers":{
-            "Authorization":"${this.token}"
+        let tok;
+        if (this.request) {
+            tok = index.h("p", { key: '76cfff11222876b763227b5cf8ae6036148954c0' }, index.h("h1", { key: '6fb95434270d6a2fe0093af8ab5f9193a184fef2' }, "The code is sent with this information from the app "), "grant_type: ", this.request.grant_type, index.h("br", { key: '74bfb40589468a84122e33bad349e118af032ce7' }), "redirect_uri: ", this.request.redirect_uri, index.h("br", { key: 'f29b4667a6b7c0a26c24bafb8c461ecf0a2946bc' }), "client_id: ", this.request.client_id, index.h("br", { key: 'a1a7691b92bf1348769e29efb1f492fc2f25d414' }), "client_secret: ", this.request.client_secret, index.h("br", { key: 'c9732e2a0b149fb74d3989354d7731cb61b21595' }), index.h("strong", { key: '80e2bc17d5919db1eb261e50350fd3e376ae6d61' }, "code:", this.request.code), index.h("br", { key: '386edaf72a6d4fec7a6d5da6173374b1bd690d13' }));
+            if (this.showResponse) {
+                tok = index.h("p", { key: '5bb0e2432bde6822b821ad442a654b8ce8d4bf81' }, index.h("h1", { key: 'aca73ca9dbf95f11e49be060531e1d5a79c85142' }, "This is the response with the token information "), "access_token: ", this.deets.access_token, index.h("br", { key: '80a67649cacc1c5c12554e73d4309ed623be2c03' }), "expires_in: ", this.deets.expires_in, index.h("br", { key: '0be235acf34bf1de24d5f3949ee09cee5e05b9e7' }), "refresh_token: ", this.deets.refresh_token, index.h("br", { key: 'f8c8cafdba4944aa50e3b3193eae5c7aabf76924' }), "refresh_token_expires_in: ", this.deets.refresh_token_expires_in, index.h("br", { key: 'd4dccec318508e4b02611af4ce60bbf4a3f5423b' }), "token_type: ", this.deets.token_type, index.h("br", { key: '34f77777f333b27ec60eeb05256b77e19fb8a951' }), "scope: ", this.deets.scope);
             }
-        }`;
+        }
+        // deets: ${JSON.stringify(this.deets)}
+        // {
+        //     "headers":{
+        //     "Authorization":"${this.token}"
+        //     }
+        // }`
         return [
-            index.h("div", { key: '26ab486fef2b166a447c13f614b80cd2c020ded7', class: "frame" + (this.hide ? " hidden" : "") }, index.h("h1", { key: '91c99e15f532c37b940b3097032239ba598df5b8' }, "Copy this text into your Global Environment Variable"), index.h("p", { key: '44e779b18231f89cc166698f6c2490a53007ad82' }, tok), index.h("button", { key: '50d89701f7d9029b6f9f84a9e7217caa01d0dcd7', onClick: () => { this.hide = !this.hide; } }, "close"))
+            index.h("div", { key: '7d0d0b7a97804b99564a5939a6d64fb9ad48b397', class: "frame" + (this.hide ? " hidden" : "") }, index.h("p", { key: 'cbf5252bffb015e4a6b0704f48b9120dc8700fda' }, tok), index.h("button", { key: '7254d54eaf39767d2df54c273a3efd44c7a467bf', onClick: () => { this.showResponse = !this.showResponse; } }, this.showResponse ? "Show Request" : "Show Response"), index.h("button", { key: '52b2c2aec29e4b488dfc11bff736a6b82ae33556', onClick: () => { this.hide = !this.hide; } }, "close"))
         ];
     }
 };
-wxccAuth.style = WxccAuthWidgetStyle0;
+wxccAuth.style = WxccAuthDemoWidgetStyle0;
 
 const wxccGuidePanelCss = "aside{position:fixed;bottom:0;right:-100%;width:40rem;max-width:34%;height:92vh;background:#d6c5c5;box-shadow:0 2px 8px rgba(0, 0, 0, 0.27);transition:right 1.3s ease-out;z-index:2;overflow:scroll}:host([opened]) aside{right:0}header{display:flex;padding:1rem;background:black;position:fixed;top:8%;width:100%}h1.post-title{font-size:1.5rem;color:white;margin:0}.post-content{margin-left:1em}h1{font-size:1.5rem;margin:0}header button{position:absolute;top:0;right:0;padding:1rem;color:white;background:transparent;font-size:1.5rem;border:none}header button:focus{outline:none}#tabs{display:flex;justify-content:center;width:100%;margin:1rem 0;padding-top:4rem}#tabs button{width:30%;background:white;color:black;text-align:center;border:1px solid black;font:inherit;padding:0.15rem 0}#tabs button.active,#tabs button:hover,#tabs button:active{background:black;color:white}#tabs button:focus{outline:none}#contact-information{padding:0 1rem}.site-header,.site-footer,.book-header,.book-summary,.search-results{display:none}ul.nav{margin:1em;padding:0;list-style:none}li.nav{margin:0.25rem 0;padding:0.25rem;border:1px solid #ccc;cursor:pointer}li.nav:hover,li.nav:active{background:black;color:white}";
 const WxccGuidePanelStyle0 = wxccGuidePanelCss;
@@ -169,9 +184,9 @@ const SideDrawer = class {
         }
     }
     render() {
-        let mainContent = this.content || index.h("slot", { key: 'd672c99154317ee19c85f0960ae87084f24d0659' });
+        let mainContent = this.content || index.h("slot", { key: '7a87471f301689b2e910228a3ee887af0281a3ae' });
         if (this.showNav) {
-            mainContent = index.h("ul", { key: 'df47f6f1c7e4eda2cf6debb2c26783439917f99d', class: "nav" }, this.lessons.map(lesson => (index.h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, index.h("strong", null, lesson.title)))));
+            mainContent = index.h("ul", { key: 'e1a7741ac9b9e9165937ce6c0f0cca098cca66bd', class: "nav" }, this.lessons.map(lesson => (index.h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, index.h("strong", null, lesson.title)))));
         }
         // ( 
         //     <div id="contact-information">
@@ -185,7 +200,7 @@ const SideDrawer = class {
         //  )}
         return [
             // <div class="backdrop" onClick={this.onCloseDrawer.bind(this)}/>,
-            index.h("aside", { key: '9903b2fe417810c545a93cfcb4b6b5f7df77e302' }, index.h("header", { key: 'e294c15c1ff1c847dd68e178b1c5ff3c5d24ca53' }, index.h("h1", { key: 'e645f46456ea139232b60be5cdf1f87b7ca5e8d4', class: "post-title" }, this.currentPage || this.arttitle)), index.h("section", { key: '94f8863d5ccd0d3693eb853cee9983fb062103df', id: "tabs" }, index.h("button", { key: '210a6c1e647aec0b8d1b02311570506e633ff8b0', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), index.h("button", { key: '6e507053143f6078afacffb1c2e9a9830d568e91', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), index.h("main", { key: 'a9818617822c30571eeba179fc894b301dfb2187' }, mainContent))
+            index.h("aside", { key: '0318ee33f3de4dc468676ec8527eb70469638ad1' }, index.h("header", { key: '863b6746eeee9b265307274445f56fb2d836085b' }, index.h("h1", { key: '8bbc29d61215ba87ccca27f7ec9e1d16f4bbd038', class: "post-title" }, this.currentPage || this.arttitle)), index.h("section", { key: 'a6a5ca8c78d0ed5757f48d0408a091752d042dfb', id: "tabs" }, index.h("button", { key: '4ed4cf72031b2e00cab638bfe54b861dfcb18abf', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), index.h("button", { key: '1b6cfd848bf64e37022f9b4068053d8ec2809e5e', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), index.h("main", { key: '4f128600315092df5614eb5c6b08982c4025db19' }, mainContent))
         ];
     }
 };
@@ -247,7 +262,7 @@ const PageControls = class {
     }
     render() {
         // console.log(this.lessons[0])
-        return (index.h("div", { key: 'bd758d6a9277f9fb126416b9d9c8c1efd6ce2d57', class: "controls" }, index.h("span", { key: 'd68c0d17106c69eb48ab599bbf36766a95c515ca', id: "back", onClick: this.onBack.bind(this), class: "nav" }, "Back"), index.h("span", { key: '5620944328d8f8ff15618ba1f5864eca01b2c769', id: "tools", class: "mag" }, "Tools"), index.h("div", { key: '4f40c83a7932f1355250359c3f155b26afb05838', class: "tools" }, index.h("span", { key: '759362e2832c8e9c655412e8c2aa9c90a3ebca24', onClick: this.onTimeWidget.bind(this) }, "Time Tool"), index.h("span", { key: 'b4217475843c6d6a055a7dc11bddaab1af99fa2f', onClick: () => { this.vidPop.emit(); } }, "Show Video"), index.h("span", { key: '5280cf4c70c1b5e2bd7d338350df3aa76cdd91f8', onClick: () => { this.wxccAuthPop.emit(); } }, "Authorization")), index.h("span", { key: '807635762510d2810c2f12d26531ab8555f6a762', id: "guide", onClick: this.onToggleGuide.bind(this) }, "Guide"), index.h("span", { key: 'fd8003db2ed0d73be879d366b48e323fc59fd610', id: "next", onClick: this.onNext.bind(this), class: "nav" }, "Next")));
+        return (index.h("div", { key: '93739d34b3209ba33f38fa7069e59b53fc4f2cfd', class: "controls" }, index.h("span", { key: '585c2fe01a00c69666ac14d8326bc869c8b70e63', id: "back", onClick: this.onBack.bind(this), class: "nav" }, "Back"), index.h("span", { key: 'a22835f39677ba6f7e449a7e7c53cee4ff1c836c', id: "tools", class: "mag" }, "Tools"), index.h("div", { key: 'ba79ab399639fca3ed90576e8d5e127de8f04dbe', class: "tools" }, index.h("span", { key: '57f36cd3a173a20c93d612ec5799fba148fafe67', onClick: this.onTimeWidget.bind(this) }, "Time Tool"), index.h("span", { key: '72232113f0734edf0d4d1419cebde9c8a7a8b324', onClick: () => { this.vidPop.emit(); } }, "Show Video"), index.h("span", { key: '358a102dc97562f9eca7f55cadcae88e72efa14c', onClick: () => { this.wxccAuthPop.emit(); } }, "Authorization")), index.h("span", { key: '5c4f0f872f07dcf462ffd3c365c975ea21f567e3', id: "guide", onClick: this.onToggleGuide.bind(this) }, "Guide"), index.h("span", { key: '6565226ba24e6c2466da169381e022c97d8a3756', id: "next", onClick: this.onNext.bind(this), class: "nav" }, "Next")));
     }
 };
 PageControls.style = WxccPageControlsStyle0;
@@ -285,7 +300,7 @@ const wxccTime = class {
             }
             // this.fDate.value = this.fd.toISOString().slice(0, 10)
             let month = ("0" + (this.fd.getMonth() + 1)).slice(-2, 3);
-            let date = ("0" + (this.fd.getDate() + 1)).slice(-2, 3);
+            let date = ("0" + (this.fd.getDate())).slice(-2, 3);
             // console.log(month)
             this.fDate.value = (this.fd.getFullYear() + "-" + month + "-" + date);
             this.fTime.value = this.fd.toTimeString().slice(0, 8);
@@ -303,12 +318,12 @@ const wxccTime = class {
             }
             // this.tDate.value = this.td.toISOString().slice(0, 10)
             let month = ("0" + (this.td.getMonth() + 1)).slice(-2, 3);
-            let date = ("0" + (this.td.getDate() + 1)).slice(-2, 3);
+            let date = ("0" + (this.td.getDate())).slice(-2, 3);
             // console.log(month)
             this.tDate.value = (this.td.getFullYear() + "-" + month + "-" + date);
             this.tTime.value = this.td.toTimeString().slice(0, 8);
             this.to = this.td.valueOf();
-            console.log(this.td.getDate());
+            // console.log(this.td.getDate())
         }
     }
     onManSet(zzz) {
@@ -325,7 +340,7 @@ const wxccTime = class {
     }
     render() {
         return [
-            index.h("div", { key: '0af5a1b34c5e9e1286d433e16b99773161a4b98e', class: "frame" + (this.hide ? " hidden" : "") }, index.h("header", { key: 'ba4b2471857ee377f9c9789f270cccf015304db3' }, index.h("span", { key: '186a9a8c23964e3a6510808ac06f213e91c292f1', class: "hideMe", onClick: this.onToggle.bind(this) }, "Hide"), index.h("div", { key: 'aaf74d1280921783bb199f55f802854272a2d417', class: "title" }, "Time Widget")), index.h("section", { key: '1ab4fbb451eab7b7cc40170c0bfb4f88b69225d8', class: "widgets" }, index.h("div", { key: '0b10f9e978ba1aa9312302b6f413439e7185e7cd' }, index.h("label", { key: 'fe8cc06de1c8c0de42ee05e23dfe3d438f1d35cb', id: "from" }, "From: "), index.h("input", { key: '82486c60a1821a87dabe2b6f0303f57648e53e14', type: "date", onChange: this.onManSet.bind(this, "from"), ref: el => this.fDate = el }), index.h("input", { key: '9ecd2ef3a392c3679da566583a807231264eb5d7', type: "time", onChange: this.onManSet.bind(this, "from"), ref: el => this.fTime = el }), index.h("select", { key: '9c7bc33a528d4c2a0ea855ecd2b82fbafc8bc250', ref: el => this.fromSelected = el, onChange: this.onToSelect.bind(this, "from") }, index.h("option", { key: 'b255c3a93301831d2d612a3e2adf2904d35777ad' }), index.h("option", { key: '14069fac3e21d507e64c2a7641b39985422a1e7a', value: "600000" }, "10 minutes ago"), index.h("option", { key: '9c8b93e6a279084965b3314b1a413b2bab00fd2a', value: "3600000" }, "1 hour ago"), index.h("option", { key: '8ea01dec34094be10911c2ddb391a1e4959f41e5', value: "86400000" }, "1 day ago"), index.h("option", { key: '0db847f98854cda0a712124a32d004fad7264817', value: "604800000" }, "1 week ago"))), index.h("br", { key: 'd00713d9a395b672013a2b540b4b8f7130e37489' }), index.h("div", { key: 'dc33cd4d93c6465bc7cf73485c2eb77972d9b2b2' }, index.h("label", { key: '7d0a335f604c6bf4e61b7a5108aca4d7c5ffa4d5', id: "to" }, "To: "), index.h("input", { key: '333e9771c8388910c113f5cf8336eb5ec1a7d34f', type: "date", onChange: this.onManSet.bind(this, "to"), ref: el => this.tDate = el }), index.h("input", { key: '3997394e32a98e968429d0e18435db3fa30090bd', type: "time", onChange: this.onManSet.bind(this, "to"), ref: el => this.tTime = el }), index.h("select", { key: '2fefc932be1b98555cff1546478e3197760f83a9', ref: el => this.toSelected = el, onChange: this.onToSelect.bind(this, "to") }, index.h("option", { key: '8a28a9393a880ec33ddbf2ec6e0dfff0efaa77a7' }), index.h("option", { key: '6e6bc389648509781bd5224b6eb116c9bc9b52be', value: "now" }, "Now"), index.h("option", { key: 'a4ccb01e46fc8260c367aca49a7f877916e7de8c', value: "600000" }, "10 minutes ago"), index.h("option", { key: '98c5952bc0f2134d7fced2d08a872e2e6e5ed67e', value: "3600000" }, "1 hour ago"), index.h("option", { key: 'edf4887af39ff155759d7f0987e17aea271da061', value: "86400000" }, "1 day ago"), index.h("option", { key: '24feb591ee2286a94211484a4b6560d1363b0d5b', value: "604800000" }, "1 week ago")))), index.h("br", { key: '223b429059c5e134dff61d38315c03f4c8c00b13' }), index.h("section", { key: 'f9704abd7791eae15f18e777df6b57a4246eeeb4' }, index.h("p", { key: 'd26ce3944164f0dc9d8031df96932e4fc9b88b54' }, "from: \"", this.from, "\"", index.h("br", { key: 'b9657b94a769e88f5d2754dbe11f4172f980f70f' }), "to: \"", this.to, "\"")))
+            index.h("div", { key: '83aff60a620ccb0e152ae40bc79c21718e52cab7', class: "frame" + (this.hide ? " hidden" : "") }, index.h("header", { key: 'ba78b496434fa09a7e5ee55a1e465fa1fd37a6cf' }, index.h("span", { key: '4caed5195322d61b1503dd31c6e3447563fbdd48', class: "hideMe", onClick: this.onToggle.bind(this) }, "Hide"), index.h("div", { key: 'ee5d050605106819266a8b6bfb9e361a18cc8173', class: "title" }, "Time Widget")), index.h("section", { key: '93146168855757696e3fae64981d2e609b693850', class: "widgets" }, index.h("div", { key: '6710e950cdbcf44ceb00ebea469cf95ad09b7961' }, index.h("label", { key: '13e35fb30c5e85dd044c32c4c80cca2e08c34d58', id: "from" }, "From: "), index.h("input", { key: '480b9b43620a431173b034afaf1d0af9d4064ad2', type: "date", onChange: this.onManSet.bind(this, "from"), ref: el => this.fDate = el }), index.h("input", { key: '00b1c87ed30eea67ee9e6566d29cf5193c432359', type: "time", onChange: this.onManSet.bind(this, "from"), ref: el => this.fTime = el }), index.h("select", { key: 'b725301496ec9a17446f5d294fed3a7c337960d3', ref: el => this.fromSelected = el, onChange: this.onToSelect.bind(this, "from") }, index.h("option", { key: 'b78acbcd554026c86e5815bc8ada4cff8b122034' }), index.h("option", { key: 'fbe96af98f36203fabafdee68421de40133c9b6d', value: "600000" }, "10 minutes ago"), index.h("option", { key: '170b6e8c4075a4c4b4a5648006a5451ef9da87c4', value: "3600000" }, "1 hour ago"), index.h("option", { key: '85d3967c8a8548062b968239f019ced7559e9d1e', value: "86400000" }, "1 day ago"), index.h("option", { key: '0e8c91ea3fdb4824364f89db125de6990f56c61b', value: "604800000" }, "1 week ago"))), index.h("br", { key: 'a601dfdebe80e07050c92d4b71bbcf56b37d6b76' }), index.h("div", { key: '102f32924271cbef25842de188d4f7efaa227ef5' }, index.h("label", { key: 'e3cd9cf556caea16e81fe9ff1efba37fed0df51f', id: "to" }, "To: "), index.h("input", { key: '7cf31494d794908eb675be14d430e2afaa1448b7', type: "date", onChange: this.onManSet.bind(this, "to"), ref: el => this.tDate = el }), index.h("input", { key: '2c1734a5a4740f50433dfdfbb10530c4d2b1b0f1', type: "time", onChange: this.onManSet.bind(this, "to"), ref: el => this.tTime = el }), index.h("select", { key: '6667ec13c577e5bce2c765da35e53b39849e96cd', ref: el => this.toSelected = el, onChange: this.onToSelect.bind(this, "to") }, index.h("option", { key: 'a214b3987293caaacb74fc42c8ebbb4b2dac4757' }), index.h("option", { key: '8315ee18ab31a979106bb42e75ba117ff1ef4f38', value: "now" }, "Now"), index.h("option", { key: '680b0afb357132adf286c970be4a50a979140263', value: "600000" }, "10 minutes ago"), index.h("option", { key: '51c35ae1905672c44ae351a042998512f40d2610', value: "3600000" }, "1 hour ago"), index.h("option", { key: '32f7e0be2bad5db598309d10c91b886660913e17', value: "86400000" }, "1 day ago"), index.h("option", { key: '183480f79362c705e81b1f72094b3c17072fb113', value: "604800000" }, "1 week ago")))), index.h("br", { key: 'a194f8e8c1a471108d0fa6ef560b9b97858ced10' }), index.h("section", { key: '48d5f1a4401db138bf605922c7f13e506ddd16cf' }, index.h("p", { key: 'c77f887bd4b8191095aec95ab1eec3a962804e26' }, "from: \"", this.from, "\"", index.h("br", { key: '1cc1503550a43d11026169ad674730f4115d4a14' }), "to: \"", this.to, "\"")))
         ];
     }
 };
@@ -374,15 +389,15 @@ const wxccVideoModal = class {
         let url = `https://app.vidcast.io/share/embed/${this.vidId}`;
         this.btnLable = this.vidBig ? "Smaller" : "Bigger";
         return [
-            index.h("div", { key: '00c3e8437cbfdba74be8a5f58f0cec6c47803bd7', id: "cover", class: this.backDrop ? "covered" : "" }),
-            index.h("div", { key: '9e15eb9e4cf68257f70b5373c22cd2ebd93f040c', draggable: true, id: "my-div", ref: el => this.boxxie = el, onDragStart: () => { this.backDrop = true; }, onDragEnd: this.moveIt.bind(this), class: (this.vidBig ? "bigBoi" : "") + (this.hide ? " hidden" : "") }, index.h("div", { key: '89efbde952620af56a620ef3c1cb182dc0116d7c', id: "my-div-header" }, index.h("span", { key: '15292a9150363e894cf527b972a18d30b9022c64', class: "hideMe", onClick: this.onToggleHide.bind(this) }, "Hide"), "Click here to move ", index.h("button", { key: '6b2e80e4fec268ec82604e4908a39e34acab8e89', class: "sizeBar", onClick: this.onToggleSize.bind(this) }, this.btnLable)), index.h("iframe", { key: 'f6201ddfebf02984092bde2a5923224914c436e3', src: url, height: "100%", width: "100%", frameborder: "0", loading: "lazy" }))
+            index.h("div", { key: '079cdba25e97d542449b8a20613e6a83b17a6085', id: "cover", class: this.backDrop ? "covered" : "" }),
+            index.h("div", { key: '8fa5d3af3cc6af857dc84fa37f897e2744edd558', draggable: true, id: "my-div", ref: el => this.boxxie = el, onDragStart: () => { this.backDrop = true; }, onDragEnd: this.moveIt.bind(this), class: (this.vidBig ? "bigBoi" : "") + (this.hide ? " hidden" : "") }, index.h("div", { key: 'f58ea4514f8e2eb0875e5222a0a60fae23ece876', id: "my-div-header" }, index.h("span", { key: '6e66920986196d7ded6700f6a74c31f6641dfb7f', class: "hideMe", onClick: this.onToggleHide.bind(this) }, "Hide"), "Click here to move ", index.h("button", { key: '0de77369c676cb46b086d1f532ec7b9748ba26d0', class: "sizeBar", onClick: this.onToggleSize.bind(this) }, this.btnLable)), index.h("iframe", { key: '50227e0bc1ed37b339cd8f9e6f863a557d91ce1c', src: url, height: "100%", width: "100%", frameborder: "0", loading: "lazy" }))
         ];
     }
 };
 wxccVideoModal.style = WxccVideoModalStyle0;
 
 exports.wxcc_altair = wxccAltair;
-exports.wxcc_auth_widget = wxccAuth;
+exports.wxcc_auth_demo_widget = wxccAuth;
 exports.wxcc_guide_panel = SideDrawer;
 exports.wxcc_page_controls = PageControls;
 exports.wxcc_time = wxccTime;

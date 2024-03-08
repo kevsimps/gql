@@ -1,13 +1,15 @@
-import { proxyCustomElement, HTMLElement, h } from '@stencil/core/internal/client';
+'use strict';
+
+Object.defineProperty(exports, '__esModule', { value: true });
+
+const index = require('./index-88a1a3cb.js');
 
 const wxccAuthWidgetCss = ".frame{position:absolute;z-index:5;height:25vh;background:#ccc;left:20%;top:50%;padding:2em}h1{text-align:center}.hidden{display:none}";
 const WxccAuthWidgetStyle0 = wxccAuthWidgetCss;
 
-const wxccAuth = /*@__PURE__*/ proxyCustomElement(class wxccAuth extends HTMLElement {
-    constructor() {
-        super();
-        this.__registerHost();
-        this.__attachShadow();
+const wxccAuth = class {
+    constructor(hostRef) {
+        index.registerInstance(this, hostRef);
         this.token = undefined;
         this.expStamp = undefined;
         this.hide = true;
@@ -58,34 +60,12 @@ const wxccAuth = /*@__PURE__*/ proxyCustomElement(class wxccAuth extends HTMLEle
             }
         }`;
         return [
-            h("div", { key: 'c98637edf2bb946730bbabca6668470f4dbbe742', class: "frame" + (this.hide ? " hidden" : "") }, h("h1", { key: 'c996f9dfba2122296ce6da43036ad63a2b4289b5' }, "Copy this text into your Global Environment Variable"), h("p", { key: '6896c243d64f9504ac53ce5ccff20eac27d0f199' }, tok), h("button", { key: 'de4bfa82b0a90ee6bd338a4118cbdf52d1df3d9d', onClick: () => { this.hide = !this.hide; } }, "close"))
+            index.h("div", { key: 'c98637edf2bb946730bbabca6668470f4dbbe742', class: "frame" + (this.hide ? " hidden" : "") }, index.h("h1", { key: 'c996f9dfba2122296ce6da43036ad63a2b4289b5' }, "Copy this text into your Global Environment Variable"), index.h("p", { key: '6896c243d64f9504ac53ce5ccff20eac27d0f199' }, tok), index.h("button", { key: 'de4bfa82b0a90ee6bd338a4118cbdf52d1df3d9d', onClick: () => { this.hide = !this.hide; } }, "close"))
         ];
     }
-    static get style() { return WxccAuthWidgetStyle0; }
-}, [1, "wxcc-auth-widget", {
-        "callbackUrl": [1, "callback-url"],
-        "token": [32],
-        "expStamp": [32],
-        "hide": [32],
-        "burp": [64]
-    }, [[16, "wxccAuthPop", "onGetAuth"]]]);
-function defineCustomElement$1() {
-    if (typeof customElements === "undefined") {
-        return;
-    }
-    const components = ["wxcc-auth-widget"];
-    components.forEach(tagName => { switch (tagName) {
-        case "wxcc-auth-widget":
-            if (!customElements.get(tagName)) {
-                customElements.define(tagName, wxccAuth);
-            }
-            break;
-    } });
-}
+};
+wxccAuth.style = WxccAuthWidgetStyle0;
 
-const WxccAuthWidget = wxccAuth;
-const defineCustomElement = defineCustomElement$1;
+exports.wxcc_auth_widget = wxccAuth;
 
-export { WxccAuthWidget, defineCustomElement };
-
-//# sourceMappingURL=wxcc-auth-widget.js.map
+//# sourceMappingURL=wxcc-auth-widget.cjs.entry.js.map
