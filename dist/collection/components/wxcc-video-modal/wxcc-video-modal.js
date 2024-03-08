@@ -38,8 +38,8 @@ export class wxccVideoModal {
         let url = `https://app.vidcast.io/share/embed/${this.vidId}`;
         this.btnLable = this.vidBig ? "Smaller" : "Bigger";
         return [
-            h("div", { key: '00c3e8437cbfdba74be8a5f58f0cec6c47803bd7', id: "cover", class: this.backDrop ? "covered" : "" }),
-            h("div", { key: '9e15eb9e4cf68257f70b5373c22cd2ebd93f040c', draggable: true, id: "my-div", ref: el => this.boxxie = el, onDragStart: () => { this.backDrop = true; }, onDragEnd: this.moveIt.bind(this), class: (this.vidBig ? "bigBoi" : "") + (this.hide ? " hidden" : "") }, h("div", { key: '89efbde952620af56a620ef3c1cb182dc0116d7c', id: "my-div-header" }, h("span", { key: '15292a9150363e894cf527b972a18d30b9022c64', class: "hideMe", onClick: this.onToggleHide.bind(this) }, "Hide"), "Click here to move ", h("button", { key: '6b2e80e4fec268ec82604e4908a39e34acab8e89', class: "sizeBar", onClick: this.onToggleSize.bind(this) }, this.btnLable)), h("iframe", { key: 'f6201ddfebf02984092bde2a5923224914c436e3', src: url, height: "100%", width: "100%", frameborder: "0", loading: "lazy" }))
+            h("div", { key: '079cdba25e97d542449b8a20613e6a83b17a6085', id: "cover", class: this.backDrop ? "covered" : "" }),
+            h("div", { key: '8fa5d3af3cc6af857dc84fa37f897e2744edd558', draggable: true, id: "my-div", ref: el => this.boxxie = el, onDragStart: () => { this.backDrop = true; }, onDragEnd: this.moveIt.bind(this), class: (this.vidBig ? "bigBoi" : "") + (this.hide ? " hidden" : "") }, h("div", { key: 'f58ea4514f8e2eb0875e5222a0a60fae23ece876', id: "my-div-header" }, h("span", { key: '6e66920986196d7ded6700f6a74c31f6641dfb7f', class: "hideMe", onClick: this.onToggleHide.bind(this) }, "Hide"), "Click here to move ", h("button", { key: '0de77369c676cb46b086d1f532ec7b9748ba26d0', class: "sizeBar", onClick: this.onToggleSize.bind(this) }, this.btnLable)), h("iframe", { key: '50227e0bc1ed37b339cd8f9e6f863a557d91ce1c', src: url, height: "100%", width: "100%", frameborder: "0", loading: "lazy" }))
         ];
     }
     static get is() { return "wxcc-video-modal"; }

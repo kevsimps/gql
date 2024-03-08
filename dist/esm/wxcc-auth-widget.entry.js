@@ -1,6 +1,11 @@
-import { h } from "@stencil/core";
-export class wxccAuth {
-    constructor() {
+import { r as registerInstance, h } from './index-565df2c6.js';
+
+const wxccAuthWidgetCss = ".frame{position:absolute;z-index:5;height:25vh;background:#ccc;left:20%;top:50%;padding:2em}h1{text-align:center}.hidden{display:none}";
+const WxccAuthWidgetStyle0 = wxccAuthWidgetCss;
+
+const wxccAuth = class {
+    constructor(hostRef) {
+        registerInstance(this, hostRef);
         this.token = undefined;
         this.expStamp = undefined;
         this.hide = true;
@@ -54,79 +59,9 @@ export class wxccAuth {
             h("div", { key: 'c98637edf2bb946730bbabca6668470f4dbbe742', class: "frame" + (this.hide ? " hidden" : "") }, h("h1", { key: 'c996f9dfba2122296ce6da43036ad63a2b4289b5' }, "Copy this text into your Global Environment Variable"), h("p", { key: '6896c243d64f9504ac53ce5ccff20eac27d0f199' }, tok), h("button", { key: 'de4bfa82b0a90ee6bd338a4118cbdf52d1df3d9d', onClick: () => { this.hide = !this.hide; } }, "close"))
         ];
     }
-    static get is() { return "wxcc-auth-widget"; }
-    static get encapsulation() { return "shadow"; }
-    static get originalStyleUrls() {
-        return {
-            "$": ["wxcc-auth-widget.css"]
-        };
-    }
-    static get styleUrls() {
-        return {
-            "$": ["wxcc-auth-widget.css"]
-        };
-    }
-    static get properties() {
-        return {
-            "callbackUrl": {
-                "type": "string",
-                "mutable": false,
-                "complexType": {
-                    "original": "string",
-                    "resolved": "string",
-                    "references": {}
-                },
-                "required": false,
-                "optional": false,
-                "docs": {
-                    "tags": [],
-                    "text": ""
-                },
-                "attribute": "callback-url",
-                "reflect": false
-            }
-        };
-    }
-    static get states() {
-        return {
-            "token": {},
-            "expStamp": {},
-            "hide": {}
-        };
-    }
-    static get methods() {
-        return {
-            "burp": {
-                "complexType": {
-                    "signature": "(x: any) => Promise<void>",
-                    "parameters": [{
-                            "name": "x",
-                            "type": "any",
-                            "docs": ""
-                        }],
-                    "references": {
-                        "Promise": {
-                            "location": "global",
-                            "id": "global::Promise"
-                        }
-                    },
-                    "return": "Promise<void>"
-                },
-                "docs": {
-                    "text": "",
-                    "tags": []
-                }
-            }
-        };
-    }
-    static get listeners() {
-        return [{
-                "name": "wxccAuthPop",
-                "method": "onGetAuth",
-                "target": "body",
-                "capture": false,
-                "passive": false
-            }];
-    }
-}
-//# sourceMappingURL=wxcc-auth-widget.js.map
+};
+wxccAuth.style = WxccAuthWidgetStyle0;
+
+export { wxccAuth as wxcc_auth_widget };
+
+//# sourceMappingURL=wxcc-auth-widget.entry.js.map

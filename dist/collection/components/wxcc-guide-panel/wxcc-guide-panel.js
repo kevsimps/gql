@@ -85,9 +85,9 @@ export class SideDrawer {
         }
     }
     render() {
-        let mainContent = this.content || h("slot", { key: 'd672c99154317ee19c85f0960ae87084f24d0659' });
+        let mainContent = this.content || h("slot", { key: '7a87471f301689b2e910228a3ee887af0281a3ae' });
         if (this.showNav) {
-            mainContent = h("ul", { key: 'df47f6f1c7e4eda2cf6debb2c26783439917f99d', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
+            mainContent = h("ul", { key: 'e1a7741ac9b9e9165937ce6c0f0cca098cca66bd', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
         }
         // ( 
         //     <div id="contact-information">
@@ -101,7 +101,7 @@ export class SideDrawer {
         //  )}
         return [
             // <div class="backdrop" onClick={this.onCloseDrawer.bind(this)}/>,
-            h("aside", { key: '9903b2fe417810c545a93cfcb4b6b5f7df77e302' }, h("header", { key: 'e294c15c1ff1c847dd68e178b1c5ff3c5d24ca53' }, h("h1", { key: 'e645f46456ea139232b60be5cdf1f87b7ca5e8d4', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '94f8863d5ccd0d3693eb853cee9983fb062103df', id: "tabs" }, h("button", { key: '210a6c1e647aec0b8d1b02311570506e633ff8b0', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '6e507053143f6078afacffb1c2e9a9830d568e91', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: 'a9818617822c30571eeba179fc894b301dfb2187' }, mainContent))
+            h("aside", { key: '0318ee33f3de4dc468676ec8527eb70469638ad1' }, h("header", { key: '863b6746eeee9b265307274445f56fb2d836085b' }, h("h1", { key: '8bbc29d61215ba87ccca27f7ec9e1d16f4bbd038', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: 'a6a5ca8c78d0ed5757f48d0408a091752d042dfb', id: "tabs" }, h("button", { key: '4ed4cf72031b2e00cab638bfe54b861dfcb18abf', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '1b6cfd848bf64e37022f9b4068053d8ec2809e5e', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: '4f128600315092df5614eb5c6b08982c4025db19' }, mainContent))
         ];
     }
     static get is() { return "wxcc-guide-panel"; }

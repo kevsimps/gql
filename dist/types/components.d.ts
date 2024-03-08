@@ -8,6 +8,10 @@ import { HTMLStencilElement, JSXBase } from "./stencil-public-runtime";
 export namespace Components {
     interface WxccAltair {
     }
+    interface WxccAuthDemoWidget {
+        "burp": (x: any) => Promise<void>;
+        "callbackUrl": string;
+    }
     interface WxccAuthWidget {
         "burp": (x: any) => Promise<void>;
         "callbackUrl": string;
@@ -35,6 +39,12 @@ declare global {
     var HTMLWxccAltairElement: {
         prototype: HTMLWxccAltairElement;
         new (): HTMLWxccAltairElement;
+    };
+    interface HTMLWxccAuthDemoWidgetElement extends Components.WxccAuthDemoWidget, HTMLStencilElement {
+    }
+    var HTMLWxccAuthDemoWidgetElement: {
+        prototype: HTMLWxccAuthDemoWidgetElement;
+        new (): HTMLWxccAuthDemoWidgetElement;
     };
     interface HTMLWxccAuthWidgetElement extends Components.WxccAuthWidget, HTMLStencilElement {
     }
@@ -83,6 +93,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "wxcc-altair": HTMLWxccAltairElement;
+        "wxcc-auth-demo-widget": HTMLWxccAuthDemoWidgetElement;
         "wxcc-auth-widget": HTMLWxccAuthWidgetElement;
         "wxcc-guide-panel": HTMLWxccGuidePanelElement;
         "wxcc-page-controls": HTMLWxccPageControlsElement;
@@ -92,6 +103,9 @@ declare global {
 }
 declare namespace LocalJSX {
     interface WxccAltair {
+    }
+    interface WxccAuthDemoWidget {
+        "callbackUrl"?: string;
     }
     interface WxccAuthWidget {
         "callbackUrl"?: string;
@@ -115,6 +129,7 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "wxcc-altair": WxccAltair;
+        "wxcc-auth-demo-widget": WxccAuthDemoWidget;
         "wxcc-auth-widget": WxccAuthWidget;
         "wxcc-guide-panel": WxccGuidePanel;
         "wxcc-page-controls": WxccPageControls;
@@ -127,6 +142,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "wxcc-altair": LocalJSX.WxccAltair & JSXBase.HTMLAttributes<HTMLWxccAltairElement>;
+            "wxcc-auth-demo-widget": LocalJSX.WxccAuthDemoWidget & JSXBase.HTMLAttributes<HTMLWxccAuthDemoWidgetElement>;
             "wxcc-auth-widget": LocalJSX.WxccAuthWidget & JSXBase.HTMLAttributes<HTMLWxccAuthWidgetElement>;
             "wxcc-guide-panel": LocalJSX.WxccGuidePanel & JSXBase.HTMLAttributes<HTMLWxccGuidePanelElement>;
             "wxcc-page-controls": LocalJSX.WxccPageControls & JSXBase.HTMLAttributes<HTMLWxccPageControlsElement>;
