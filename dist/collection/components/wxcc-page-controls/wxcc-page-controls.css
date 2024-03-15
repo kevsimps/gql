@@ -36,10 +36,11 @@ span {
 
 span:hover{
     background: #0c0a0a;
+    
 }
 
 .tools {
-    margin-top: -1.5vh;
+    margin-top: -2vh;
     padding: 5px 28px;
     position: absolute;
     z-index: 10;
@@ -48,6 +49,8 @@ span:hover{
     /* left: 21.65%; */
     left: 31.33%;
     display: none;
+    /* transition: display ease-out 5s; */
+    
 }
 
 .tools span {
@@ -62,8 +65,11 @@ span:hover{
 
 .mag:hover~.tools {
     display: block;
+    
+    
 }
 
 .tools:hover {
     display: block;
+    /* transition: block ease-in-out 2s; */
 }

@@ -1,3 +1,25 @@
+'use strict';
+
+function _interopNamespace(e) {
+  if (e && e.__esModule) return e;
+  var n = Object.create(null);
+  if (e) {
+    Object.keys(e).forEach(function (k) {
+      if (k !== 'default') {
+        var d = Object.getOwnPropertyDescriptor(e, k);
+        Object.defineProperty(n, k, d.get ? d : {
+          enumerable: true,
+          get: function () {
+            return e[k];
+          }
+        });
+      }
+    });
+  }
+  n['default'] = e;
+  return Object.freeze(n);
+}
+
 const NAMESPACE = 'gql-classroom';
 
 /**
@@ -43,6 +65,11 @@ const SLOT_FB_CSS = 'slot-fb{display:contents}slot-fb[hidden]{display:none}';
  * Don't add values to these!!
  */
 const EMPTY_OBJ = {};
+/**
+ * Namespaces
+ */
+const SVG_NS = 'http://www.w3.org/2000/svg';
+const HTML_NS = 'http://www.w3.org/1999/xhtml';
 const isDef = (v) => v != null;
 /**
  * Check whether a value is a 'complex type', defined here as an object or a
@@ -495,8 +522,15 @@ const createElm = (oldParentVNode, newParentVNode, childIndex, parentElm) => {
         elm = newVNode.$elm$ = doc.createTextNode(newVNode.$text$);
     }
     else {
+        if (!isSvgMode) {
+            isSvgMode = newVNode.$tag$ === 'svg';
+        }
         // create element
-        elm = newVNode.$elm$ = (doc.createElement(newVNode.$tag$));
+        elm = newVNode.$elm$ = (doc.createElementNS(isSvgMode ? SVG_NS : HTML_NS, newVNode.$tag$)
+            );
+        if (isSvgMode && newVNode.$tag$ === 'foreignObject') {
+            isSvgMode = false;
+        }
         // add css classes, attrs, props, listeners, etc.
         {
             updateElement(null, newVNode, isSvgMode);
@@ -515,6 +549,16 @@ const createElm = (oldParentVNode, newParentVNode, childIndex, parentElm) => {
                     // append our new node
                     elm.appendChild(childNode);
                 }
+            }
+        }
+        {
+            if (newVNode.$tag$ === 'svg') {
+                // Only reset the SVG context when we're exiting <svg> element
+                isSvgMode = false;
+            }
+            else if (elm.tagName === 'foreignObject') {
+                // Reenter SVG context when we're exiting <foreignObject> element
+                isSvgMode = true;
             }
         }
     }
@@ -839,6 +883,11 @@ const patch = (oldVNode, newVNode, isInitialRender = false) => {
     const text = newVNode.$text$;
     if (text === null) {
         {
+            // test if we're rendering an svg element, or still rendering nodes inside of one
+            // only add this to the when the compiler sees we're using an svg somewhere
+            isSvgMode = tag === 'svg' ? true : tag === 'foreignObject' ? false : isSvgMode;
+        }
+        {
             if (tag === 'slot' && !useNativeShadowDom) ;
             else {
                 // either this is the first render of an element OR it's an update
@@ -864,6 +913,9 @@ const patch = (oldVNode, newVNode, isInitialRender = false) => {
         else if (oldChildren !== null) {
             // no new child vnodes, but there are old child vnodes to remove
             removeVnodes(oldChildren, 0, oldChildren.length - 1);
+        }
+        if (isSvgMode && tag === 'svg') {
+            isSvgMode = false;
         }
     }
     else if (oldVNode.$text$ !== text) {
@@ -1758,12 +1810,12 @@ const loadModule = (cmpMeta, hostRef, hmrVersionId) => {
         return module[exportName];
     }
     /*!__STENCIL_STATIC_IMPORT_SWITCH__*/
-    return import(
+    return Promise.resolve().then(function () { return /*#__PURE__*/_interopNamespace(require(
     /* @vite-ignore */
     /* webpackInclude: /\.entry\.js$/ */
     /* webpackExclude: /\.system\.entry\.js$/ */
     /* webpackMode: "lazy" */
-    `./${bundleId}.entry.js${''}`).then((importedModule) => {
+    `./${bundleId}.entry.js${''}`)); }).then((importedModule) => {
         {
             cmpModules.set(bundleId, importedModule);
         }
@@ -1847,6 +1899,11 @@ const flush = () => {
 const nextTick = (cb) => promiseResolve().then(cb);
 const writeTask = /*@__PURE__*/ queueTask(queueDomWrites, true);
 
-export { bootstrapLazy as b, createEvent as c, h, promiseResolve as p, registerInstance as r, setNonce as s };
+exports.bootstrapLazy = bootstrapLazy;
+exports.createEvent = createEvent;
+exports.h = h;
+exports.promiseResolve = promiseResolve;
+exports.registerInstance = registerInstance;
+exports.setNonce = setNonce;
 
-//# sourceMappingURL=index-565df2c6.js.map
+//# sourceMappingURL=index-38d9cf48.js.map
