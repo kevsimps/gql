@@ -1,4 +1,4 @@
-import { r as registerInstance, h } from './index-565df2c6.js';
+import { r as registerInstance, h } from './index-9e44e949.js';
 
 const wxccAuthWidgetCss = ".frame{position:absolute;z-index:5;height:25vh;background:#ccc;left:20%;top:50%;padding:2em}h1{text-align:center}.hidden{display:none}";
 const WxccAuthWidgetStyle0 = wxccAuthWidgetCss;

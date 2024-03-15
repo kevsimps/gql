@@ -29,7 +29,7 @@ const SideDrawer = /*@__PURE__*/ proxyCustomElement(class SideDrawer extends HTM
     // }
     onContentChange(content) {
         this.showNav = content === "nav";
-        console.log(content);
+        // console.log(content)
     }
     // @Method()
     // async open(){
@@ -92,9 +92,9 @@ const SideDrawer = /*@__PURE__*/ proxyCustomElement(class SideDrawer extends HTM
         }
     }
     render() {
-        let mainContent = this.content || h("slot", { key: '7a87471f301689b2e910228a3ee887af0281a3ae' });
+        let mainContent = this.content || h("slot", { key: '86ecf0a9590859f40d06e33e8361ac0deea876d3' });
         if (this.showNav) {
-            mainContent = h("ul", { key: 'e1a7741ac9b9e9165937ce6c0f0cca098cca66bd', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
+            mainContent = h("ul", { key: 'c1da402e26f560136c6402df71e59e186dfb21d2', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
         }
         // ( 
         //     <div id="contact-information">
@@ -108,7 +108,7 @@ const SideDrawer = /*@__PURE__*/ proxyCustomElement(class SideDrawer extends HTM
         //  )}
         return [
             // <div class="backdrop" onClick={this.onCloseDrawer.bind(this)}/>,
-            h("aside", { key: '0318ee33f3de4dc468676ec8527eb70469638ad1' }, h("header", { key: '863b6746eeee9b265307274445f56fb2d836085b' }, h("h1", { key: '8bbc29d61215ba87ccca27f7ec9e1d16f4bbd038', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: 'a6a5ca8c78d0ed5757f48d0408a091752d042dfb', id: "tabs" }, h("button", { key: '4ed4cf72031b2e00cab638bfe54b861dfcb18abf', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '1b6cfd848bf64e37022f9b4068053d8ec2809e5e', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: '4f128600315092df5614eb5c6b08982c4025db19' }, mainContent))
+            h("aside", { key: '3c17a721d9a8eb17a3277136418447cfae4fd00c' }, h("header", { key: '9e51466cda03e22258a3c717dd62eac5eef941b0' }, h("h1", { key: '85aa3f6cfd1e81c87c6edbe4154bd8ca96897469', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '8c37814bf0b9cc4071b9b047d5be40c946c13538', id: "tabs" }, h("button", { key: '9dcc1fd47a96b0ead5807f4a8401746360da0e48', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '1cd7088cf6da4448fbc2b31c3f824be4afa9943b', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: '8880928062121d12f328e8022d79b28c1dc4408e' }, mainContent))
         ];
     }
     static get style() { return WxccGuidePanelStyle0; }

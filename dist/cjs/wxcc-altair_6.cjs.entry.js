@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const index = require('./index-88a1a3cb.js');
+const index = require('./index-38d9cf48.js');
 
 const wxccAltairCss = "#frame{height:92vh;bottom:0}";
 const WxccAltairStyle0 = wxccAltairCss;
@@ -121,7 +121,7 @@ const SideDrawer = class {
     // }
     onContentChange(content) {
         this.showNav = content === "nav";
-        console.log(content);
+        // console.log(content)
     }
     // @Method()
     // async open(){
@@ -184,9 +184,9 @@ const SideDrawer = class {
         }
     }
     render() {
-        let mainContent = this.content || index.h("slot", { key: '7a87471f301689b2e910228a3ee887af0281a3ae' });
+        let mainContent = this.content || index.h("slot", { key: '86ecf0a9590859f40d06e33e8361ac0deea876d3' });
         if (this.showNav) {
-            mainContent = index.h("ul", { key: 'e1a7741ac9b9e9165937ce6c0f0cca098cca66bd', class: "nav" }, this.lessons.map(lesson => (index.h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, index.h("strong", null, lesson.title)))));
+            mainContent = index.h("ul", { key: 'c1da402e26f560136c6402df71e59e186dfb21d2', class: "nav" }, this.lessons.map(lesson => (index.h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, index.h("strong", null, lesson.title)))));
         }
         // ( 
         //     <div id="contact-information">
@@ -200,13 +200,13 @@ const SideDrawer = class {
         //  )}
         return [
             // <div class="backdrop" onClick={this.onCloseDrawer.bind(this)}/>,
-            index.h("aside", { key: '0318ee33f3de4dc468676ec8527eb70469638ad1' }, index.h("header", { key: '863b6746eeee9b265307274445f56fb2d836085b' }, index.h("h1", { key: '8bbc29d61215ba87ccca27f7ec9e1d16f4bbd038', class: "post-title" }, this.currentPage || this.arttitle)), index.h("section", { key: 'a6a5ca8c78d0ed5757f48d0408a091752d042dfb', id: "tabs" }, index.h("button", { key: '4ed4cf72031b2e00cab638bfe54b861dfcb18abf', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), index.h("button", { key: '1b6cfd848bf64e37022f9b4068053d8ec2809e5e', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), index.h("main", { key: '4f128600315092df5614eb5c6b08982c4025db19' }, mainContent))
+            index.h("aside", { key: '3c17a721d9a8eb17a3277136418447cfae4fd00c' }, index.h("header", { key: '9e51466cda03e22258a3c717dd62eac5eef941b0' }, index.h("h1", { key: '85aa3f6cfd1e81c87c6edbe4154bd8ca96897469', class: "post-title" }, this.currentPage || this.arttitle)), index.h("section", { key: '8c37814bf0b9cc4071b9b047d5be40c946c13538', id: "tabs" }, index.h("button", { key: '9dcc1fd47a96b0ead5807f4a8401746360da0e48', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), index.h("button", { key: '1cd7088cf6da4448fbc2b31c3f824be4afa9943b', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), index.h("main", { key: '8880928062121d12f328e8022d79b28c1dc4408e' }, mainContent))
         ];
     }
 };
 SideDrawer.style = WxccGuidePanelStyle0;
 
-const wxccPageControlsCss = ".controls{width:100%;background-color:#555;text-align:center;transition:all 0.3s ease;color:white;font-size:36px;margin:auto;height:8vh;overflow:hidden;}button{padding:14px 28px;margin:15px;width:20%}span{display:inline-block;padding:5px 28px;margin:1.5vh;width:15%;background:#998f8f;cursor:pointer;}span:hover{background:#0c0a0a}.tools{margin-top:-1.5vh;padding:5px 28px;position:absolute;z-index:10;width:15%;background:#998f8f;left:31.33%;display:none}.tools span{margin:2px;width:auto}.nav{width:5%}.mag:hover~.tools{display:block}.tools:hover{display:block}";
+const wxccPageControlsCss = ".controls{width:100%;background-color:#555;text-align:center;transition:all 0.3s ease;color:white;font-size:36px;margin:auto;height:8vh;overflow:hidden;}button{padding:14px 28px;margin:15px;width:20%}span{display:inline-block;padding:5px 28px;margin:1.5vh;width:15%;background:#998f8f;cursor:pointer;}span:hover{background:#0c0a0a}.tools{margin-top:-2vh;padding:5px 28px;position:absolute;z-index:10;width:15%;background:#998f8f;left:31.33%;display:none;}.tools span{margin:2px;width:auto}.nav{width:5%}.mag:hover~.tools{display:block}.tools:hover{display:block;}";
 const WxccPageControlsStyle0 = wxccPageControlsCss;
 
 const PageControls = class {
@@ -346,7 +346,7 @@ const wxccTime = class {
 };
 wxccTime.style = WxccTimeStyle0;
 
-const wxccVideoModalCss = "#cover{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:9;display:none;opacity:0;transition:opacity 0.5s ease-out}#cover.covered{display:block}#my-div{position:absolute;z-index:200;background-color:#f1f1f1;text-align:center;border:1px solid #d3d3d3;top:25%;left:25%}#my-div-header{padding:10px;cursor:move;z-index:10;background-color:#2196F3;color:#fff}.sizeBar{float:right}.bigBoi{width:50%;height:50%}.hidden{display:none}.hideMe{float:left;cursor:pointer}";
+const wxccVideoModalCss = "#cover{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:9;display:none;opacity:0;transition:opacity 0.5s ease-out}#cover.covered{display:block}#my-div{position:absolute;z-index:200;background-color:#f1f1f1;text-align:center;border:1px solid #d3d3d3;top:25%;left:25%}#my-div-header{padding:10px;z-index:10;background-color:#2196F3;color:#fff;height:20px}.sizeBar{float:right;cursor:pointer}.bigBoi{width:50%;height:50%}.hidden{display:none}.hideMe{float:right;cursor:pointer}#move{float:left;cursor:grab}";
 const WxccVideoModalStyle0 = wxccVideoModalCss;
 
 const wxccVideoModal = class {
@@ -378,19 +378,19 @@ const wxccVideoModal = class {
     }
     moveIt(event) {
         event.preventDefault();
-        console.log(event);
-        console.log(this.boxxie.offsetTop);
-        console.log(this.boxxie.offsetLeft);
+        // console.log(event)
+        // console.log(this.boxxie.offsetTop)
+        // console.log(this.boxxie.offsetLeft)
         this.boxxie.style.top = Math.abs(event["clientY"]) + "px";
         this.boxxie.style.left = Math.abs(event["clientX"]) + "px";
         this.backDrop = false;
     }
     render() {
         let url = `https://app.vidcast.io/share/embed/${this.vidId}`;
-        this.btnLable = this.vidBig ? "Smaller" : "Bigger";
+        this.btnLable = this.vidBig ? index.h("div", null, index.h("svg", { xmlns: "http://www.w3.org/2000/svg", height: "20", width: "17.5", viewBox: "0 0 448 512" }, index.h("path", { fill: "#c0c0c0", d: "M160 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V64zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32H96v64c0 17.7 14.3 32 32 32s32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zM352 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V64zM320 320c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320z" })), "\u2003") : index.h("div", null, index.h("svg", { xmlns: "http://www.w3.org/2000/svg", height: "20", width: "17.5", viewBox: "0 0 448 512" }, index.h("path", { fill: "#c0c0c0", d: "M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z" })), "\u2003");
         return [
-            index.h("div", { key: '079cdba25e97d542449b8a20613e6a83b17a6085', id: "cover", class: this.backDrop ? "covered" : "" }),
-            index.h("div", { key: '8fa5d3af3cc6af857dc84fa37f897e2744edd558', draggable: true, id: "my-div", ref: el => this.boxxie = el, onDragStart: () => { this.backDrop = true; }, onDragEnd: this.moveIt.bind(this), class: (this.vidBig ? "bigBoi" : "") + (this.hide ? " hidden" : "") }, index.h("div", { key: 'f58ea4514f8e2eb0875e5222a0a60fae23ece876', id: "my-div-header" }, index.h("span", { key: '6e66920986196d7ded6700f6a74c31f6641dfb7f', class: "hideMe", onClick: this.onToggleHide.bind(this) }, "Hide"), "Click here to move ", index.h("button", { key: '0de77369c676cb46b086d1f532ec7b9748ba26d0', class: "sizeBar", onClick: this.onToggleSize.bind(this) }, this.btnLable)), index.h("iframe", { key: '50227e0bc1ed37b339cd8f9e6f863a557d91ce1c', src: url, height: "100%", width: "100%", frameborder: "0", loading: "lazy" }))
+            index.h("div", { key: '6e5cc9baf0cdbfbfbf06830980249d211518577b', id: "cover", class: this.backDrop ? "covered" : "" }),
+            index.h("div", { key: '8f6427554291f64f5187a6a7ca124dc873df780d', draggable: true, id: "my-div", ref: el => this.boxxie = el, onDragStart: () => { this.backDrop = true; }, onDragEnd: this.moveIt.bind(this), class: (this.vidBig ? "bigBoi" : "") + (this.hide ? " hidden" : "") }, index.h("div", { key: '1120b6c0a999eafd4aa5128b190000791d89437e', id: "my-div-header" }, index.h("span", { key: '3d8aaa2334a49a41116677251fc853ea6606f6c8', class: "hideMe", onClick: this.onToggleHide.bind(this) }, index.h("svg", { key: '5bbb27bcb6dcd134f8193cb4cb7f369c644642a1', xmlns: "http://www.w3.org/2000/svg", height: "14", width: "17.5", viewBox: "0 0 640 512" }, index.h("path", { key: 'd80f62734f00b8acf3d4a37e94cedb8b51e26894', fill: "#c0c0c0", d: "M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zm151 118.3C226 97.7 269.5 80 320 80c65.2 0 118.8 29.6 159.9 67.7C518.4 183.5 545 226 558.6 256c-12.6 28-36.6 66.8-70.9 100.9l-53.8-42.2c9.1-17.6 14.2-37.5 14.2-58.7c0-70.7-57.3-128-128-128c-32.2 0-61.7 11.9-84.2 31.5l-46.1-36.1zM394.9 284.2l-81.5-63.9c4.2-8.5 6.6-18.2 6.6-28.3c0-5.5-.7-10.9-2-16c.7 0 1.3 0 2 0c44.2 0 80 35.8 80 80c0 9.9-1.8 19.4-5.1 28.2zm51.3 163.3l-41.9-33C378.8 425.4 350.7 432 320 432c-65.2 0-118.8-29.6-159.9-67.7C121.6 328.5 95 286 81.4 256c8.3-18.4 21.5-41.5 39.4-64.8L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5zm-88-69.3L302 334c-23.5-5.4-43.1-21.2-53.7-42.3l-56.1-44.2c-.2 2.8-.3 5.6-.3 8.5c0 70.7 57.3 128 128 128c13.3 0 26.1-2 38.2-5.8z" }))), index.h("svg", { key: '07d96bba563bfc3c9f75dec7549fa4014074f22c', id: "move", xmlns: "http://www.w3.org/2000/svg", height: "20", width: "20", viewBox: "0 0 512 512" }, index.h("path", { key: '5ea98de99b13adcaeb0d62855bbd6cb91e656af8', fill: "#c0c0c0", d: "M278.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l9.4-9.4V224H109.3l9.4-9.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-9.4-9.4H224V402.7l-9.4-9.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-9.4 9.4V288H402.7l-9.4 9.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l9.4 9.4H288V109.3l9.4 9.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-64-64z" })), index.h("span", { key: '9086695c393fb729a71e8c043c6a11dc8b5d3770', class: "sizeBar", onClick: this.onToggleSize.bind(this) }, this.btnLable)), index.h("iframe", { key: '22cfc33a8d824c52182945240617117de83f7076', src: url, height: "100%", width: "100%", frameborder: "0", loading: "lazy" }))
         ];
     }
 };
