@@ -23,7 +23,8 @@ aside {
 header{
     display: flex;
     padding: 1rem;
-    background: black;
+    /* background: black; */
+    background: #2196F3;
     position: fixed;
     top:8%;
     width:100%;
@@ -81,7 +82,8 @@ header button:focus{
 #tabs button.active,
 #tabs button:hover,
 #tabs button:active{
-    background:black;
+    /* background:black; */
+    background: #2196F3;;
     color: white
 }
 #tabs button:focus{
@@ -133,6 +135,7 @@ li.nav{
 
 li.nav:hover,
 li.nav:active{
-    background:black;
+    /* background:black; */
+    background: #2196F3;
     color: white;
 }

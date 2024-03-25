@@ -1,6 +1,6 @@
 import { proxyCustomElement, HTMLElement, createEvent, h } from '@stencil/core/internal/client';
 
-const wxccPageControlsCss = ".controls{width:100%;background-color:#555;text-align:center;transition:all 0.3s ease;color:white;font-size:36px;margin:auto;height:8vh;overflow:hidden;}button{padding:14px 28px;margin:15px;width:20%}span{display:inline-block;padding:5px 28px;margin:1.5vh;width:15%;background:#998f8f;cursor:pointer;}span:hover{background:#0c0a0a}.tools{margin-top:-2vh;padding:5px 28px;position:absolute;z-index:10;width:15%;background:#998f8f;left:31.33%;display:none;}.tools span{margin:2px;width:auto}.nav{width:5%}.mag:hover~.tools{display:block}.tools:hover{display:block;}";
+const wxccPageControlsCss = ".controls {\r\n    width: 100%;\r\n    background-color: #555;\r\n    text-align: center;\r\n    transition: all 0.3s ease;\r\n    color: white;\r\n    font-size: 36px;\r\n    margin: auto;\r\n    height: 8vh;\r\n    overflow: hidden;\r\n    /* position: relative; */\r\n    /* display: grid; */\r\n    /* display:flex; */\r\n\r\n    /* justify-content: center; */\r\n    /* align-items: center; */\r\n\r\n}\r\n\r\nbutton {\r\n    padding: 14px 28px;\r\n    margin: 15px;\r\n    width: 20%\r\n}\r\n\r\nspan {\r\n    display: inline-block;\r\n    padding: 5px 28px;\r\n    margin: 1.5vh;\r\n    width: 15%;\r\n    background: #998f8f;\r\n    cursor: pointer;\r\n    border-radius: 30px\r\n        /* height: 4vh; */\r\n\r\n}\r\n\r\nspan:hover {\r\n    /* background: #0c0a0a; */\r\n    background: #2196F3;\r\n    ;\r\n\r\n}\r\n\r\n.tools {\r\n    margin-top: -2vh;\r\n    padding: 5px 28px;\r\n    position: absolute;\r\n    z-index: 10;\r\n    width: 15%;\r\n    background: #998f8f;\r\n    /* left: 21.65%; */\r\n    left: 31.33%;\r\n    display: none;\r\n    /* transition: display ease-out 5s; */\r\n\r\n}\r\n@media(width <= 1440px){\r\n    .tools{\r\n        left: 30.33%;\r\n    }\r\n}\r\n.tools span {\r\n    margin: 2px;\r\n    /* width: auto; */\r\n    width: 13vw;\r\n\r\n}\r\n\r\n.nav {\r\n    width: 5%\r\n}\r\n\r\n#tools:hover {\r\n    border-top-left-radius: 30px;\r\n    border-top-right-radius: 30px;\r\n    border-bottom-right-radius: 0px;\r\n    border-bottom-left-radius: 0px;\r\n}\r\n\r\n.mag:hover~.tools {\r\n    display: block;\r\n    border-bottom-right-radius: 30px;\r\n    border-bottom-left-radius: 30px;\r\n}\r\n\r\n\r\n.controls:has(.tools:hover) #tools {\r\n    border-top-left-radius: 30px;\r\n    border-top-right-radius: 30px;\r\n    border-bottom-right-radius: 0px;\r\n    border-bottom-left-radius: 0px;\r\n}\r\n\r\n\r\n.tools:hover {\r\n    display: block;\r\n    border-bottom-right-radius: 30px;\r\n    border-bottom-left-radius: 30px;\r\n    transition: block ease-in-out 2s;\r\n}";
 const WxccPageControlsStyle0 = wxccPageControlsCss;
 
 const PageControls = /*@__PURE__*/ proxyCustomElement(class PageControls extends HTMLElement {
@@ -13,17 +13,6 @@ const PageControls = /*@__PURE__*/ proxyCustomElement(class PageControls extends
         this.wxccTimeWidget = createEvent(this, "wxccTimeWidget", 7);
         this.wxccAuthPop = createEvent(this, "wxccAuthPop", 7);
         this.vidPop = createEvent(this, "vidPop", 7);
-        this.lessons = [
-            { "title": "Preparing and validating your lab", "address": "https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_0.html" },
-            { "title": "Adding Callback Number Read Back", "address": "https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_1.html" },
-            { "title": "Reusing Our Existing Wait Treatment and Opt-out", "address": "https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_2.html" },
-            { "title": "Menu to Select from 50 States", "address": "https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_3.html" },
-            { "title": "Making the Flow Multilingual", "address": "https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_4.html" },
-            { "title": "Customizing the Wait Treatment by Business Unit", "address": "https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_5.html" },
-            { "title": "Targeted Agent Routing", "address": "https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Lab_6.html" },
-            { "title": "Pause", "address": "https://ciscolivelabs.github.io/wxcclabguides/LTRCCT-2004/Pause_5" },
-            { "title": "Pause", "address": "https://webexcc-sa.github.io/wxccintrolabs/pages/IVR/" }
-        ];
         this.currentPage = undefined;
     }
     onToggleGuide() {
@@ -58,7 +47,7 @@ const PageControls = /*@__PURE__*/ proxyCustomElement(class PageControls extends
     }
     render() {
         // console.log(this.lessons[0])
-        return (h("div", { key: '93739d34b3209ba33f38fa7069e59b53fc4f2cfd', class: "controls" }, h("span", { key: '585c2fe01a00c69666ac14d8326bc869c8b70e63', id: "back", onClick: this.onBack.bind(this), class: "nav" }, "Back"), h("span", { key: 'a22835f39677ba6f7e449a7e7c53cee4ff1c836c', id: "tools", class: "mag" }, "Tools"), h("div", { key: 'ba79ab399639fca3ed90576e8d5e127de8f04dbe', class: "tools" }, h("span", { key: '57f36cd3a173a20c93d612ec5799fba148fafe67', onClick: this.onTimeWidget.bind(this) }, "Time Tool"), h("span", { key: '72232113f0734edf0d4d1419cebde9c8a7a8b324', onClick: () => { this.vidPop.emit(); } }, "Show Video"), h("span", { key: '358a102dc97562f9eca7f55cadcae88e72efa14c', onClick: () => { this.wxccAuthPop.emit(); } }, "Authorization")), h("span", { key: '5c4f0f872f07dcf462ffd3c365c975ea21f567e3', id: "guide", onClick: this.onToggleGuide.bind(this) }, "Guide"), h("span", { key: '6565226ba24e6c2466da169381e022c97d8a3756', id: "next", onClick: this.onNext.bind(this), class: "nav" }, "Next")));
+        return (h("div", { key: 'c330ccb4b877fe57dd1f559c5ac0c24d92cad815', class: "controls" }, h("span", { key: 'c6a56a22234cc05eacd342cec729909cd8642e0f', id: "back", onClick: this.onBack.bind(this), class: "nav" }, "Back"), h("span", { key: '2c5b492d362ad50c5ad54db9112391b3ea0638b5', id: "tools", class: "mag" }, "Tools"), h("div", { key: '69c47c3712bb33216791a022f375c43d9466ca73', class: "tools" }, h("span", { key: '3a6b1e74038d213e6eef006a8cf8987b1061da09', onClick: this.onTimeWidget.bind(this) }, "Time Tool"), h("span", { key: 'b7458b7c177e06f9d6fcd04de2b9553c55bbe107', onClick: () => { this.vidPop.emit(); } }, "Show Video"), h("span", { key: '8fbc4e1efdb4464b16b79b5978c5ffcafcb0f7c7', onClick: () => { this.wxccAuthPop.emit(); } }, "Authorization")), h("span", { key: '541a3de47cf3cd8d937820c3d083d3738c7997c4', id: "guide", onClick: this.onToggleGuide.bind(this) }, "Guide"), h("span", { key: 'c9f87a06de1f93fa518aa72a7f20866fbb7a2501', id: "next", onClick: this.onNext.bind(this), class: "nav" }, "Next")));
     }
     static get style() { return WxccPageControlsStyle0; }
 }, [1, "wxcc-page-controls", {

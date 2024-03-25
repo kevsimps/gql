@@ -7,7 +7,7 @@
     font-size: 36px;
     margin: auto;
     height: 8vh;
-    overflow:hidden;
+    overflow: hidden;
     /* position: relative; */
     /* display: grid; */
     /* display:flex; */
@@ -30,13 +30,16 @@ span {
     width: 15%;
     background: #998f8f;
     cursor: pointer;
-    /* height: 4vh; */
+    border-radius: 30px
+        /* height: 4vh; */
 
 }
 
-span:hover{
-    background: #0c0a0a;
-    
+span:hover {
+    /* background: #0c0a0a; */
+    background: #2196F3;
+    ;
+
 }
 
 .tools {
@@ -50,12 +53,17 @@ span:hover{
     left: 31.33%;
     display: none;
     /* transition: display ease-out 5s; */
-    
-}
 
+}
+@media(width <= 1440px){
+    .tools{
+        left: 30.33%;
+    }
+}
 .tools span {
     margin: 2px;
-    width: auto;
+    /* width: auto; */
+    width: 13vw;
 
 }
 
@@ -63,13 +71,31 @@ span:hover{
     width: 5%
 }
 
+#tools:hover {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
 .mag:hover~.tools {
     display: block;
-    
-    
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
 }
+
+
+.controls:has(.tools:hover) #tools {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
 
 .tools:hover {
     display: block;
-    /* transition: block ease-in-out 2s; */
+    border-bottom-right-radius: 30px;
+    border-bottom-left-radius: 30px;
+    transition: block ease-in-out 2s;
 }
