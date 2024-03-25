@@ -6,10 +6,6 @@ export declare class PageControls {
     wxccAuthPop: EventEmitter<string>;
     vidPop: EventEmitter<string>;
     currentPage: string;
-    lessons: {
-        title: string;
-        address: string;
-    }[];
     onToggleGuide(): void;
     onNext(): void;
     onBack(): void;
