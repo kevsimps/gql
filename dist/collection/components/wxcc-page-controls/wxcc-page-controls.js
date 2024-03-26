@@ -36,7 +36,7 @@ export class PageControls {
     }
     render() {
         // console.log(this.lessons[0])
-        return (h("div", { key: 'c330ccb4b877fe57dd1f559c5ac0c24d92cad815', class: "controls" }, h("span", { key: 'c6a56a22234cc05eacd342cec729909cd8642e0f', id: "back", onClick: this.onBack.bind(this), class: "nav" }, "Back"), h("span", { key: '2c5b492d362ad50c5ad54db9112391b3ea0638b5', id: "tools", class: "mag" }, "Tools"), h("div", { key: '69c47c3712bb33216791a022f375c43d9466ca73', class: "tools" }, h("span", { key: '3a6b1e74038d213e6eef006a8cf8987b1061da09', onClick: this.onTimeWidget.bind(this) }, "Time Tool"), h("span", { key: 'b7458b7c177e06f9d6fcd04de2b9553c55bbe107', onClick: () => { this.vidPop.emit(); } }, "Show Video"), h("span", { key: '8fbc4e1efdb4464b16b79b5978c5ffcafcb0f7c7', onClick: () => { this.wxccAuthPop.emit(); } }, "Authorization")), h("span", { key: '541a3de47cf3cd8d937820c3d083d3738c7997c4', id: "guide", onClick: this.onToggleGuide.bind(this) }, "Guide"), h("span", { key: 'c9f87a06de1f93fa518aa72a7f20866fbb7a2501', id: "next", onClick: this.onNext.bind(this), class: "nav" }, "Next")));
+        return (h("div", { key: '25e29195bcc21f14f1179de524360f437002c743', class: "controls" }, h("span", { key: 'a60df1fe885fba2e8c7c8719a776cdf1aecbc940', id: "back", onClick: this.onBack.bind(this), class: "nav" }, "Back"), h("span", { key: 'e82b1a952575375741280539c42e21f8a4a28b9d', id: "tools", class: "mag" }, "Tools"), h("div", { key: 'ed61bef223baa7718410532737c13f10625bd203', class: "tools" }, h("span", { key: '205e78ac0df8c827178f7102b601971a6c58de5f', onClick: this.onTimeWidget.bind(this) }, "Time Tool"), h("span", { key: '400c8dd1e74aae44ac41c9ca647dba9c6a1a8ccd', onClick: () => { this.vodTog.emit(); } }, "Show Video"), h("span", { key: '6ae523c7cd7b5b76ee9e916b3d0e1e6250a4816d', onClick: () => { this.wxccAuthPop.emit(); } }, "Authorization")), h("span", { key: '30dbeadcd5fe04ec23fa5bb0f954e9b5c0479d23', id: "guide", onClick: this.onToggleGuide.bind(this) }, "Guide"), h("span", { key: '7c95e3ffabf929c2f92415b0670786d9f70b1027', id: "next", onClick: this.onNext.bind(this), class: "nav" }, "Next")));
     }
     static get is() { return "wxcc-page-controls"; }
     static get encapsulation() { return "shadow"; }
@@ -119,6 +119,21 @@ export class PageControls {
             }, {
                 "method": "vidPop",
                 "name": "vidPop",
+                "bubbles": true,
+                "cancelable": true,
+                "composed": true,
+                "docs": {
+                    "tags": [],
+                    "text": ""
+                },
+                "complexType": {
+                    "original": "string",
+                    "resolved": "string",
+                    "references": {}
+                }
+            }, {
+                "method": "vodTog",
+                "name": "vodTog",
                 "bubbles": true,
                 "cancelable": true,
                 "composed": true,
