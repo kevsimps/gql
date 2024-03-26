@@ -15,5 +15,6 @@ export declare class SideDrawer {
     onNext(event: CustomEvent): void;
     onChoice(url: any): void;
     getHTML(url: any): Promise<string>;
+    componentDidUpdate(): void;
     render(): any[];
 }

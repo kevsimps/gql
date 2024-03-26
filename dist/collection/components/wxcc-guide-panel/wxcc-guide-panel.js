@@ -84,24 +84,17 @@ export class SideDrawer {
             return null;
         }
     }
+    componentDidUpdate() {
+        Array.from(document.querySelector("wxcc-guide-panel").shadowRoot.querySelectorAll("textarea")).forEach((element) => { element.value = element.value.replaceAll("\\", ""); });
+    }
     render() {
-        let mainContent = this.content || h("slot", { key: '86ecf0a9590859f40d06e33e8361ac0deea876d3' });
+        let mainContent = this.content || h("slot", { key: 'eb64168084102bd31bbedf80073fe00ed7f8200c' });
         if (this.showNav) {
-            mainContent = h("ul", { key: 'c1da402e26f560136c6402df71e59e186dfb21d2', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
+            mainContent = h("ul", { key: '1e353be0c55037a40da74e2f724c52fcbe248822', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
         }
-        // ( 
-        //     <div id="contact-information">
-        //       <h2> Contact Information</h2>
-        //     <p>You can reach us via phone or email</p>  
-        //     <ul>
-        //         <li>Phone: 8144557771</li>
-        //         <li>EMail: <a href="mailto:something@something.com">something@something.com</a></li>
-        //         </ul>
-        //     </div>
-        //  )}
         return [
             // <div class="backdrop" onClick={this.onCloseDrawer.bind(this)}/>,
-            h("aside", { key: '3c17a721d9a8eb17a3277136418447cfae4fd00c' }, h("header", { key: '9e51466cda03e22258a3c717dd62eac5eef941b0' }, h("h1", { key: '85aa3f6cfd1e81c87c6edbe4154bd8ca96897469', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '8c37814bf0b9cc4071b9b047d5be40c946c13538', id: "tabs" }, h("button", { key: '9dcc1fd47a96b0ead5807f4a8401746360da0e48', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '1cd7088cf6da4448fbc2b31c3f824be4afa9943b', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: '8880928062121d12f328e8022d79b28c1dc4408e' }, mainContent))
+            h("aside", { key: 'd859f13f969e9f8b6a7bcb0770da387fd5ee8a3c' }, h("header", { key: 'e0794cb4fcae971a708e0ec4bce6c2b27b4585d3' }, h("h1", { key: 'ffeeb8d36476dc32d94f47e25bf0a119da167bda', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '48414f20dcfd58ec5b80097986664258b45f8f63', id: "tabs" }, h("button", { key: '1dd4af9d1050dfe8b7693af33a709a13e07088d6', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '2579e02395231dd4ee87b312e3a0fce5b1d280b1', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: 'fb1acdf703693aebc00131e19b51ed8797488f0a' }, mainContent))
         ];
     }
     static get is() { return "wxcc-guide-panel"; }

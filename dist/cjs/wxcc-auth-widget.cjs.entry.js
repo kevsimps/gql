@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-const index = require('./index-38d9cf48.js');
+const index = require('./index-62e43576.js');
 
 const wxccAuthWidgetCss = ".frame{position:absolute;z-index:5;height:25vh;background:#ccc;left:20%;top:50%;padding:2em}h1{text-align:center}.hidden{display:none}";
 const WxccAuthWidgetStyle0 = wxccAuthWidgetCss;
