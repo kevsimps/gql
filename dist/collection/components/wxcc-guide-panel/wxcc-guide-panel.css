@@ -1,76 +1,79 @@
 aside {
     position: fixed;
     /* top:8%; */
-    bottom:0;
-    right:-100%;
+    bottom: 0;
+    right: -100%;
     width: 40rem;
     max-width: 34%;
     height: 92vh;
     background: #d6c5c5;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.27);
     transition: right 1.3s ease-out;
-    z-index:2;
+    z-index: 2;
     overflow: scroll;
-    
+
 
 }
 
 :host([opened]) aside {
-    right:0;
+    right: 0;
 
 }
 
-header{
+header {
     display: flex;
     padding: 1rem;
     /* background: black; */
     background: #2196F3;
     position: fixed;
-    top:8%;
-    width:100%;
+    top: 8%;
+    width: 100%;
 
 }
-h1.post-title{
+
+h1.post-title {
     font-size: 1.5rem;
     color: white;
     margin: 0;
 
 }
 
-.post-content{
+.post-content {
     margin-left: 1em;
 }
 
-h1{
+h1 {
     font-size: 1.5rem;
     margin: 0;
 
 }
-header button{
+
+header button {
     position: absolute;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
     padding: 1rem;
-    color:white;
+    color: white;
     background: transparent;
     font-size: 1.5rem;
     border: none;
 
 }
 
-header button:focus{
-   outline: none; 
+header button:focus {
+    outline: none;
 }
 
-#tabs{
+#tabs {
     display: flex;
     justify-content: center;
-    width:100%;
+    width: 100%;
     margin: 1rem 0;
     padding-top: 4rem;
 
 }
-#tabs button{
+
+#tabs button {
     width: 30%;
     background: white;
     color: black;
@@ -78,21 +81,36 @@ header button:focus{
     border: 1px solid black;
     font: inherit;
     padding: 0.15rem 0;
+
 }
+
+#tabs :nth-child(1) {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+#tabs :nth-last-child(1) {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
 #tabs button.active,
 #tabs button:hover,
-#tabs button:active{
+#tabs button:active {
     /* background:black; */
-    background: #2196F3;;
+    background: #2196F3;
+    ;
     color: white
 }
-#tabs button:focus{
+
+#tabs button:focus {
     outline: none;
 }
-#contact-information{
+
+#contact-information {
     padding: 0 1rem;
 
 }
+
 /* .backdrop {
     position: fixed;
     top:0;
@@ -117,24 +135,26 @@ header button:focus{
 .site-footer,
 .book-header,
 .book-summary,
-.search-results{
+.search-results {
     display: none;
 }
-ul.nav{
+
+ul.nav {
     margin: 1em;
     padding: 0;
     list-style: none;
 
 }
-li.nav{
+
+li.nav {
     margin: 0.25rem 0;
-    padding:0.25rem;
-    border:  1px solid #ccc;
+    padding: 0.25rem;
+    border: 1px solid #ccc;
     cursor: pointer;
 }
 
 li.nav:hover,
-li.nav:active{
+li.nav:active {
     /* background:black; */
     background: #2196F3;
     color: white;

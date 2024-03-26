@@ -10,8 +10,12 @@ export declare class wxccTime {
     to: number;
     from: number;
     hide: boolean;
+    tab: string;
+    lupStamp: HTMLInputElement;
+    tStamp: string;
     onToSelect(zzz: string): void;
     onManSet(zzz: string): void;
     onToggle(): void;
+    epochToTime(): void;
     render(): any[];
 }
