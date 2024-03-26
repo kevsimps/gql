@@ -5,6 +5,7 @@ export declare class PageControls {
     wxccTimeWidget: EventEmitter<string>;
     wxccAuthPop: EventEmitter<string>;
     vidPop: EventEmitter<string>;
+    vodTog: EventEmitter<string>;
     currentPage: string;
     onToggleGuide(): void;
     onNext(): void;

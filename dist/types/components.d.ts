@@ -64,6 +64,7 @@ declare global {
         "wxccTimeWidget": string;
         "wxccAuthPop": string;
         "vidPop": string;
+        "vodTog": string;
     }
     interface HTMLWxccPageControlsElement extends Components.WxccPageControls, HTMLStencilElement {
         addEventListener<K extends keyof HTMLWxccPageControlsElementEventMap>(type: K, listener: (this: HTMLWxccPageControlsElement, ev: WxccPageControlsCustomEvent<HTMLWxccPageControlsElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -118,6 +119,7 @@ declare namespace LocalJSX {
     interface WxccPageControls {
         "onToggleGuide"?: (event: WxccPageControlsCustomEvent<string>) => void;
         "onVidPop"?: (event: WxccPageControlsCustomEvent<string>) => void;
+        "onVodTog"?: (event: WxccPageControlsCustomEvent<string>) => void;
         "onWxccAuthPop"?: (event: WxccPageControlsCustomEvent<string>) => void;
         "onWxccGuidePageTurn"?: (event: WxccPageControlsCustomEvent<string>) => void;
         "onWxccTimeWidget"?: (event: WxccPageControlsCustomEvent<string>) => void;

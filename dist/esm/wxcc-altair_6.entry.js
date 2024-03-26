@@ -128,14 +128,14 @@ const SideDrawer = class {
         this.opened = !this.opened;
     }
     onNext(event) {
-        console.log(event.detail);
+        // console.log(event.detail)
         let url;
         const iHere = this.lessons.findIndex(x => x.title === this.currentPage);
         if (!iHere) {
             this.currentPage = this.lessons[0].title;
         }
-        console.log(this.currentPage);
-        console.log(iHere);
+        // console.log(this.currentPage)
+        // console.log(iHere)
         this.currentPage = this.lessons[iHere + 1].title;
         if (event.detail === "next") {
             url = this.lessons[iHere + 1].url;
@@ -153,6 +153,7 @@ const SideDrawer = class {
                 // console.log(html);
             }
         });
+        this.showNav = false;
     }
     onChoice(url) {
         this.getHTML(url)
@@ -183,13 +184,13 @@ const SideDrawer = class {
         Array.from(document.querySelector("wxcc-guide-panel").shadowRoot.querySelectorAll("textarea")).forEach((element) => { element.value = element.value.replaceAll("\\", ""); });
     }
     render() {
-        let mainContent = this.content || h("slot", { key: 'eb64168084102bd31bbedf80073fe00ed7f8200c' });
+        let mainContent = this.content || h("slot", { key: '310b3737906d6c8b16d9e7150ddb3528526693f5' });
         if (this.showNav) {
-            mainContent = h("ul", { key: '1e353be0c55037a40da74e2f724c52fcbe248822', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
+            mainContent = h("ul", { key: '866811467c9ee25aa346213beb34219c8a037ed9', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
         }
         return [
             // <div class="backdrop" onClick={this.onCloseDrawer.bind(this)}/>,
-            h("aside", { key: 'd859f13f969e9f8b6a7bcb0770da387fd5ee8a3c' }, h("header", { key: 'e0794cb4fcae971a708e0ec4bce6c2b27b4585d3' }, h("h1", { key: 'ffeeb8d36476dc32d94f47e25bf0a119da167bda', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '48414f20dcfd58ec5b80097986664258b45f8f63', id: "tabs" }, h("button", { key: '1dd4af9d1050dfe8b7693af33a709a13e07088d6', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '2579e02395231dd4ee87b312e3a0fce5b1d280b1', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: 'fb1acdf703693aebc00131e19b51ed8797488f0a' }, mainContent))
+            h("aside", { key: '832a11c26c3e4c3c790ff1b9dfacc406e7d42cde' }, h("header", { key: '034b127df0ac34d943df822bc2436e3902244efd' }, h("h1", { key: '325443a4e9ea88eb0f25136927287f4a07e00d78', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '615f857307d0887d57987b1d664197b1a59f1fb5', id: "tabs" }, h("button", { key: 'b7d9ff42b35368a60fec017ba4a58ebb41cf5d19', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '22fbf845fef340e7b760d00e83d454df74c1e22b', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: 'f15028aed9b1a8c23b15362ba29b2e2c4f2d2af9' }, mainContent))
         ];
     }
 };
@@ -206,6 +207,7 @@ const PageControls = class {
         this.wxccTimeWidget = createEvent(this, "wxccTimeWidget", 7);
         this.wxccAuthPop = createEvent(this, "wxccAuthPop", 7);
         this.vidPop = createEvent(this, "vidPop", 7);
+        this.vodTog = createEvent(this, "vodTog", 7);
         this.currentPage = undefined;
     }
     onToggleGuide() {
@@ -240,7 +242,7 @@ const PageControls = class {
     }
     render() {
         // console.log(this.lessons[0])
-        return (h("div", { key: 'c330ccb4b877fe57dd1f559c5ac0c24d92cad815', class: "controls" }, h("span", { key: 'c6a56a22234cc05eacd342cec729909cd8642e0f', id: "back", onClick: this.onBack.bind(this), class: "nav" }, "Back"), h("span", { key: '2c5b492d362ad50c5ad54db9112391b3ea0638b5', id: "tools", class: "mag" }, "Tools"), h("div", { key: '69c47c3712bb33216791a022f375c43d9466ca73', class: "tools" }, h("span", { key: '3a6b1e74038d213e6eef006a8cf8987b1061da09', onClick: this.onTimeWidget.bind(this) }, "Time Tool"), h("span", { key: 'b7458b7c177e06f9d6fcd04de2b9553c55bbe107', onClick: () => { this.vidPop.emit(); } }, "Show Video"), h("span", { key: '8fbc4e1efdb4464b16b79b5978c5ffcafcb0f7c7', onClick: () => { this.wxccAuthPop.emit(); } }, "Authorization")), h("span", { key: '541a3de47cf3cd8d937820c3d083d3738c7997c4', id: "guide", onClick: this.onToggleGuide.bind(this) }, "Guide"), h("span", { key: 'c9f87a06de1f93fa518aa72a7f20866fbb7a2501', id: "next", onClick: this.onNext.bind(this), class: "nav" }, "Next")));
+        return (h("div", { key: '25e29195bcc21f14f1179de524360f437002c743', class: "controls" }, h("span", { key: 'a60df1fe885fba2e8c7c8719a776cdf1aecbc940', id: "back", onClick: this.onBack.bind(this), class: "nav" }, "Back"), h("span", { key: 'e82b1a952575375741280539c42e21f8a4a28b9d', id: "tools", class: "mag" }, "Tools"), h("div", { key: 'ed61bef223baa7718410532737c13f10625bd203', class: "tools" }, h("span", { key: '205e78ac0df8c827178f7102b601971a6c58de5f', onClick: this.onTimeWidget.bind(this) }, "Time Tool"), h("span", { key: '400c8dd1e74aae44ac41c9ca647dba9c6a1a8ccd', onClick: () => { this.vodTog.emit(); } }, "Show Video"), h("span", { key: '6ae523c7cd7b5b76ee9e916b3d0e1e6250a4816d', onClick: () => { this.wxccAuthPop.emit(); } }, "Authorization")), h("span", { key: '30dbeadcd5fe04ec23fa5bb0f954e9b5c0479d23', id: "guide", onClick: this.onToggleGuide.bind(this) }, "Guide"), h("span", { key: '7c95e3ffabf929c2f92415b0670786d9f70b1027', id: "next", onClick: this.onNext.bind(this), class: "nav" }, "Next")));
     }
 };
 PageControls.style = WxccPageControlsStyle0;
@@ -379,8 +381,8 @@ const wxccVideoModal = class {
         let url = `https://app.vidcast.io/share/embed/${this.vidId}`;
         this.btnLable = this.vidBig ? h("div", null, h("svg", { xmlns: "http://www.w3.org/2000/svg", height: "20", width: "17.5", viewBox: "0 0 448 512" }, h("path", { d: "M160 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V64zM32 320c-17.7 0-32 14.3-32 32s14.3 32 32 32H96v64c0 17.7 14.3 32 32 32s32-14.3 32-32V352c0-17.7-14.3-32-32-32H32zM352 64c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H352V64zM320 320c-17.7 0-32 14.3-32 32v96c0 17.7 14.3 32 32 32s32-14.3 32-32V384h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H320z" })), "\u2003") : h("div", null, " ", h("svg", { xmlns: "http://www.w3.org/2000/svg", height: "20", width: "17.5", viewBox: "0 0 448 512" }, h("path", { d: "M32 32C14.3 32 0 46.3 0 64v96c0 17.7 14.3 32 32 32s32-14.3 32-32V96h64c17.7 0 32-14.3 32-32s-14.3-32-32-32H32zM64 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v96c0 17.7 14.3 32 32 32h96c17.7 0 32-14.3 32-32s-14.3-32-32-32H64V352zM320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h64v64c0 17.7 14.3 32 32 32s32-14.3 32-32V64c0-17.7-14.3-32-32-32H320zM448 352c0-17.7-14.3-32-32-32s-32 14.3-32 32v64H320c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32-14.3 32-32V352z" })), "\u2003");
         return [
-            h("div", { key: 'b201d831b7a3079599b5d9af02b573fef7f710b7', id: "cover", class: this.backDrop ? "covered" : "" }),
-            h("div", { key: '2587bdc3c701cbd0a1bb9dc6a237ec209e6039c9', draggable: true, id: "my-div", ref: el => this.boxxie = el, onDragStart: () => { this.backDrop = true; }, onDragEnd: this.moveIt.bind(this), class: (this.vidBig ? "bigBoi" : "") + (this.hide ? " hidden" : "") }, h("div", { key: '501aad7814b1ebf8baca36bb93b6847cc82ad5e1', id: "my-div-header" }, h("span", { key: '2a60bdbd4492cd1b98d161e98dbea7a2ee0ba412', class: "hideMe", onClick: this.onToggleHide.bind(this) }, h("svg", { key: '14bbd293ae33fb266bc0782d9e5ea2e3ffb0c349', xmlns: "http://www.w3.org/2000/svg", height: "20", width: "17.5", viewBox: "0 0 640 512" }, h("path", { key: '70c669a73bf0b1d23ec00133ce30cebe8bcf8493', d: "M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zm151 118.3C226 97.7 269.5 80 320 80c65.2 0 118.8 29.6 159.9 67.7C518.4 183.5 545 226 558.6 256c-12.6 28-36.6 66.8-70.9 100.9l-53.8-42.2c9.1-17.6 14.2-37.5 14.2-58.7c0-70.7-57.3-128-128-128c-32.2 0-61.7 11.9-84.2 31.5l-46.1-36.1zM394.9 284.2l-81.5-63.9c4.2-8.5 6.6-18.2 6.6-28.3c0-5.5-.7-10.9-2-16c.7 0 1.3 0 2 0c44.2 0 80 35.8 80 80c0 9.9-1.8 19.4-5.1 28.2zm51.3 163.3l-41.9-33C378.8 425.4 350.7 432 320 432c-65.2 0-118.8-29.6-159.9-67.7C121.6 328.5 95 286 81.4 256c8.3-18.4 21.5-41.5 39.4-64.8L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5zm-88-69.3L302 334c-23.5-5.4-43.1-21.2-53.7-42.3l-56.1-44.2c-.2 2.8-.3 5.6-.3 8.5c0 70.7 57.3 128 128 128c13.3 0 26.1-2 38.2-5.8z" }))), h("svg", { key: '72c4d4dac7486ea41c4e5f688edb61a395f64b00', id: "move", xmlns: "http://www.w3.org/2000/svg", height: "20", width: "20", viewBox: "0 0 512 512" }, h("path", { key: '68c81ae9ffa795b4246f7ccdab7015eeb83e049a', d: "M278.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l9.4-9.4V224H109.3l9.4-9.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-9.4-9.4H224V402.7l-9.4-9.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-9.4 9.4V288H402.7l-9.4 9.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l9.4 9.4H288V109.3l9.4 9.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-64-64z" })), h("span", { key: 'e9ed1f13452e06849a9050a72f0b32feab481cfd', class: "sizeBar", onClick: this.onToggleSize.bind(this) }, this.btnLable)), h("iframe", { key: '04ab703de1069231ea8504f525b954169d0cf867', src: url, height: "100%", width: "100%", frameborder: "0", loading: "lazy", allowFullScreen: true }))
+            h("div", { key: '0a371030387a373bbdfb68d7c2276bb84212bed4', id: "cover", class: this.backDrop ? "covered" : "" }),
+            h("div", { key: '70cc6c985e83e8847a1840bdd9edc09a7bbeef53', draggable: true, id: "my-div", ref: el => this.boxxie = el, onDragStart: () => { this.backDrop = true; }, onDragEnd: this.moveIt.bind(this), class: (this.vidBig ? "bigBoi" : "") + (this.hide ? " hidden" : "") }, h("div", { key: '64c27fe08a56b1cdeaf734cb473c01992b79c526', id: "my-div-header" }, h("span", { key: '2c81b6dcb534c3a8ac94517a8ef71d9c1b98b58c', class: "hideMe", onClick: this.onToggleHide.bind(this) }, h("svg", { key: 'cfe14e7f24faa351d1dcf93098fdcfbfe5555716', xmlns: "http://www.w3.org/2000/svg", height: "20", width: "17.5", viewBox: "0 0 640 512" }, h("path", { key: '3ad1cacae31eb0930b03a76e99571c784ac94e74', d: "M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zm151 118.3C226 97.7 269.5 80 320 80c65.2 0 118.8 29.6 159.9 67.7C518.4 183.5 545 226 558.6 256c-12.6 28-36.6 66.8-70.9 100.9l-53.8-42.2c9.1-17.6 14.2-37.5 14.2-58.7c0-70.7-57.3-128-128-128c-32.2 0-61.7 11.9-84.2 31.5l-46.1-36.1zM394.9 284.2l-81.5-63.9c4.2-8.5 6.6-18.2 6.6-28.3c0-5.5-.7-10.9-2-16c.7 0 1.3 0 2 0c44.2 0 80 35.8 80 80c0 9.9-1.8 19.4-5.1 28.2zm51.3 163.3l-41.9-33C378.8 425.4 350.7 432 320 432c-65.2 0-118.8-29.6-159.9-67.7C121.6 328.5 95 286 81.4 256c8.3-18.4 21.5-41.5 39.4-64.8L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5zm-88-69.3L302 334c-23.5-5.4-43.1-21.2-53.7-42.3l-56.1-44.2c-.2 2.8-.3 5.6-.3 8.5c0 70.7 57.3 128 128 128c13.3 0 26.1-2 38.2-5.8z" }))), h("svg", { key: '62aa8e699dbb8d0454dce78133221a4bfa7052a2', id: "move", xmlns: "http://www.w3.org/2000/svg", height: "20", width: "20", viewBox: "0 0 512 512" }, h("path", { key: 'c39863e8e90e19328fcefbe9c28c2c2e9fc73536', d: "M278.6 9.4c-12.5-12.5-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l9.4-9.4V224H109.3l9.4-9.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-64 64c-12.5 12.5-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-9.4-9.4H224V402.7l-9.4-9.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l64 64c12.5 12.5 32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-9.4 9.4V288H402.7l-9.4 9.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l64-64c12.5-12.5 12.5-32.8 0-45.3l-64-64c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l9.4 9.4H288V109.3l9.4 9.4c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-64-64z" })), h("span", { key: '21d79b2cd23baa2d639e460a80a372be7244c8c7', class: "sizeBar", onClick: this.onToggleSize.bind(this) }, this.btnLable)), h("iframe", { key: 'f8119e810f98341c60766e88109e46182238d979', src: url, height: "100%", width: "100%", frameborder: "0", loading: "lazy", allowFullScreen: true }))
         ];
     }
 };
