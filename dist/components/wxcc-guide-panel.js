@@ -40,15 +40,15 @@ const SideDrawer = /*@__PURE__*/ proxyCustomElement(class SideDrawer extends HTM
         this.opened = !this.opened;
     }
     onNext(event) {
-        // console.log(event.detail)
+        //  console.log(event.detail)
         let url;
         const iHere = this.lessons.findIndex(x => x.title === this.currentPage);
         if (!iHere) {
             this.currentPage = this.lessons[0].title;
         }
-        // console.log(this.currentPage)
-        // console.log(iHere)
-        this.currentPage = this.lessons[iHere + 1].title;
+        //  console.log(this.currentPage)
+        //  console.log(iHere)
+        // this.currentPage = this.lessons[iHere + 1].title
         if (event.detail === "next") {
             url = this.lessons[iHere + 1].url;
             this.currentPage = this.lessons[iHere + 1].title;
@@ -96,13 +96,13 @@ const SideDrawer = /*@__PURE__*/ proxyCustomElement(class SideDrawer extends HTM
         Array.from(document.querySelector("wxcc-guide-panel").shadowRoot.querySelectorAll("textarea")).forEach((element) => { element.value = element.value.replaceAll("\\", ""); });
     }
     render() {
-        let mainContent = this.content || h("slot", { key: '310b3737906d6c8b16d9e7150ddb3528526693f5' });
+        let mainContent = this.content || h("slot", { key: '82a7fef75a1847ba3726b6e6e4f9180daaea8791' });
         if (this.showNav) {
-            mainContent = h("ul", { key: '866811467c9ee25aa346213beb34219c8a037ed9', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
+            mainContent = h("ul", { key: '88173507f24abda89f56dacb906a850586a12c60', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
         }
         return [
             // <div class="backdrop" onClick={this.onCloseDrawer.bind(this)}/>,
-            h("aside", { key: '832a11c26c3e4c3c790ff1b9dfacc406e7d42cde' }, h("header", { key: '034b127df0ac34d943df822bc2436e3902244efd' }, h("h1", { key: '325443a4e9ea88eb0f25136927287f4a07e00d78', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '615f857307d0887d57987b1d664197b1a59f1fb5', id: "tabs" }, h("button", { key: 'b7d9ff42b35368a60fec017ba4a58ebb41cf5d19', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '22fbf845fef340e7b760d00e83d454df74c1e22b', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: 'f15028aed9b1a8c23b15362ba29b2e2c4f2d2af9' }, mainContent))
+            h("aside", { key: '452b4a3f026e9d92ccc1f269ea5099f86cf08dc1' }, h("header", { key: '8cb39b9d7e11904f89221b7c9383d5f7f5a172cf' }, h("h1", { key: '2d222b4d7b17c8434fd57cbfd0661afc5d315daf', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '9d1150859cf3a94b03060cbbd293e4d6972050cd', id: "tabs" }, h("button", { key: '9162613d149081a0723db18e50b6408dd62c4484', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '49a3298c370fb8cf1c8beec397edcfc01227ca96', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: 'df39f0706d0980a7d252468259c44492751eb23f' }, mainContent))
         ];
     }
     static get style() { return WxccGuidePanelStyle0; }
