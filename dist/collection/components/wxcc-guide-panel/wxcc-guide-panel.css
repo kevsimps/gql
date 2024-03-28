@@ -11,6 +11,7 @@ aside {
     transition: right 1.3s ease-out;
     z-index: 2;
     overflow: scroll;
+    
 
 
 }
@@ -78,7 +79,7 @@ header button:focus {
     background: white;
     color: black;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid  #2196F3;
     font: inherit;
     padding: 0.15rem 0;
 
@@ -98,8 +99,8 @@ header button:focus {
 #tabs button:active {
     /* background:black; */
     background: #2196F3;
-    ;
-    color: white
+    color: white;
+    border: 1px solid #2196F3
 }
 
 #tabs button:focus {
