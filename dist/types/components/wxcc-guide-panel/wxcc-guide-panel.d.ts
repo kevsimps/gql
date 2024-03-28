@@ -9,6 +9,7 @@ export declare class SideDrawer {
     }[];
     currentPage: any;
     lList: string;
+    lastScroll: number;
     componentWillLoad(): Promise<void>;
     onContentChange(content: string): void;
     onToggle(event: CustomEvent): void;

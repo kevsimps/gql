@@ -8,6 +8,7 @@ export class SideDrawer {
         this.lessons = [];
         this.currentPage = undefined;
         this.lList = undefined;
+        this.lastScroll = 0;
     }
     async componentWillLoad() {
         const response = await fetch(this.lList);
@@ -45,10 +46,13 @@ export class SideDrawer {
         if (event.detail === "next") {
             url = this.lessons[iHere + 1].url;
             this.currentPage = this.lessons[iHere + 1].title;
+            this.lastScroll = document.querySelector("wxcc-guide-panel").shadowRoot.querySelector("aside").scrollTop;
+            document.querySelector("wxcc-guide-panel").shadowRoot.querySelector("aside").scrollTop = 0;
         }
         else {
             url = this.lessons[iHere - 1].url;
             this.currentPage = this.lessons[iHere - 1].title;
+            document.querySelector("wxcc-guide-panel").shadowRoot.querySelector("aside").scrollTop = this.lastScroll;
         }
         this.getHTML(url)
             .then(html => {
@@ -87,15 +91,16 @@ export class SideDrawer {
     }
     componentDidUpdate() {
         Array.from(document.querySelector("wxcc-guide-panel").shadowRoot.querySelectorAll("textarea")).forEach((element) => { element.value = element.value.replaceAll("\\", ""); });
+        // document.querySelector("wxcc-guide-panel").shadowRoot.querySelector("aside").scrollTop=0 
     }
     render() {
-        let mainContent = this.content || h("slot", { key: '82a7fef75a1847ba3726b6e6e4f9180daaea8791' });
+        let mainContent = this.content || h("slot", { key: '2f1080d655cefe28ada4ba2c53e1c8cad8ebfefe' });
         if (this.showNav) {
-            mainContent = h("ul", { key: '88173507f24abda89f56dacb906a850586a12c60', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
+            mainContent = h("ul", { key: '4b625c8889025f23832bffac706fd2f868de2d0e', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
         }
         return [
             // <div class="backdrop" onClick={this.onCloseDrawer.bind(this)}/>,
-            h("aside", { key: '452b4a3f026e9d92ccc1f269ea5099f86cf08dc1' }, h("header", { key: '8cb39b9d7e11904f89221b7c9383d5f7f5a172cf' }, h("h1", { key: '2d222b4d7b17c8434fd57cbfd0661afc5d315daf', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '9d1150859cf3a94b03060cbbd293e4d6972050cd', id: "tabs" }, h("button", { key: '9162613d149081a0723db18e50b6408dd62c4484', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '49a3298c370fb8cf1c8beec397edcfc01227ca96', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: 'df39f0706d0980a7d252468259c44492751eb23f' }, mainContent))
+            h("aside", { key: '9504a9d0bdc6d544ad1e3bad06afcaae38507fdf' }, h("header", { key: '4ca6bd07272ffd253ab14c196bf8d7c230eba4c3' }, h("h1", { key: 'ff14e2ec52f27c1d6aa9202649492ddf1ada1412', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: '3fc2bb65826523cdf4d7ec87b5cde36501ac8905', id: "tabs" }, h("button", { key: 'a9e3e45a9c26750e28765309367ecc01e18146b8', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '8a4dcfcaed3a61c4fd0fae18cb094d790130a258', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: 'c379d4b6ab6591d295175395ccb2a0815c4172a0' }, mainContent))
         ];
     }
     static get is() { return "wxcc-guide-panel"; }
@@ -170,7 +175,8 @@ export class SideDrawer {
             "showNav": {},
             "content": {},
             "lessons": {},
-            "currentPage": {}
+            "currentPage": {},
+            "lastScroll": {}
         };
     }
     static get listeners() {

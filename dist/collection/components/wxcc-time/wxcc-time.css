@@ -6,6 +6,7 @@
     background: #ccc;
     left:40%;
     width: 410px;
+    
 
 }
 label{
@@ -61,7 +62,7 @@ p{
     background: white;
     color: black;
     text-align: center;
-    border: 1px solid black;
+    border: 1px solid  #2196F3;
     font: inherit;
     padding: 0.15rem 0;
 
@@ -81,8 +82,8 @@ p{
 #tabs button:active {
     /* background:black; */
     background: #2196F3;
-    ;
-    color: white
+    color: white;
+    border: 1px solid  #2196F3;
 }
 
 #tabs button:focus {
