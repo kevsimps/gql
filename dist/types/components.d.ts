@@ -18,6 +18,7 @@ export namespace Components {
     }
     interface WxccGuidePanel {
         "arttitle": string;
+        "flip": boolean;
         "lList": string;
         "opened": boolean;
     }
@@ -113,6 +114,7 @@ declare namespace LocalJSX {
     }
     interface WxccGuidePanel {
         "arttitle"?: string;
+        "flip"?: boolean;
         "lList"?: string;
         "opened"?: boolean;
     }

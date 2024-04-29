@@ -2,6 +2,7 @@ export declare class SideDrawer {
     showNav: boolean;
     arttitle: string;
     opened: boolean;
+    flip: boolean;
     content: any;
     lessons: {
         title: string;
