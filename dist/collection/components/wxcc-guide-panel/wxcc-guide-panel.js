@@ -4,6 +4,7 @@ export class SideDrawer {
         this.showNav = false;
         this.arttitle = undefined;
         this.opened = undefined;
+        this.flip = undefined;
         this.content = undefined;
         this.lessons = [];
         this.currentPage = undefined;
@@ -96,13 +97,14 @@ export class SideDrawer {
         document.querySelector("wxcc-guide-panel").shadowRoot.querySelector("link[rel=stylesheet]").remove();
     }
     render() {
-        let mainContent = this.content || h("slot", { key: 'bb6903df9a962ca9f220e98d6ad01b590222debf' });
+        const fIcon = h("svg", { key: '785f49a45583c475ac9390a80c177f28ce0849e7', xmlns: "http://www.w3.org/2000/svg", viewBox: "0 0 512 512" }, h("path", { key: 'b3ff7b357ae4b75b774afd3c685add5ab39ccbb4', d: "M32 96l320 0V32c0-12.9 7.8-24.6 19.8-29.6s25.7-2.2 34.9 6.9l96 96c6 6 9.4 14.1 9.4 22.6s-3.4 16.6-9.4 22.6l-96 96c-9.2 9.2-22.9 11.9-34.9 6.9s-19.8-16.6-19.8-29.6V160L32 160c-17.7 0-32-14.3-32-32s14.3-32 32-32zM480 352c17.7 0 32 14.3 32 32s-14.3 32-32 32H160v64c0 12.9-7.8 24.6-19.8 29.6s-25.7 2.2-34.9-6.9l-96-96c-6-6-9.4-14.1-9.4-22.6s3.4-16.6 9.4-22.6l96-96c9.2-9.2 22.9-11.9 34.9-6.9s19.8 16.6 19.8 29.6l0 64H480z" }));
+        let mainContent = this.content || h("slot", { key: '9e5afd3b33f0742d359a7df28a9b1d1298f4888f' });
         if (this.showNav) {
-            mainContent = h("ul", { key: '21c9d1827b3b48e359505486166870dd0cd62cc6', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
+            mainContent = h("ul", { key: 'cc54d4382d70571707888dc09939b4bb8eda4c5b', class: "nav" }, this.lessons.map(lesson => (h("li", { class: "nav", onClick: this.onChoice.bind(this, lesson.url) }, h("strong", null, lesson.title)))));
         }
         return [
             // <div class="backdrop" onClick={this.onCloseDrawer.bind(this)}/>,
-            h("aside", { key: '4cf1062b9497a1d24e6c4056d82792f42eb730c2' }, h("header", { key: '10dba1a44be38838fa28107fec8cd74a9b7d647a' }, h("h1", { key: '7eb357f0bae53590aacba9cec971669d724dca8d', class: "post-title" }, this.currentPage || this.arttitle)), h("section", { key: 'e33c555a3b1b4f594442048b07d1e9da3058763a', id: "tabs" }, h("button", { key: '7532fb5260caffd3c4db5d0b8a2eaab3da218212', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: '01bf4696f1004032b69fb897634c1e7df7f6e666', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: 'dd6bee015563e7c31d3426e6bd5665e4ab7c1865' }, mainContent))
+            h("aside", { key: '53003b7470f3fcf82779e46bf90282142c997c3b' }, h("header", { key: 'e4f0126ad18f4a8e91728258c97edd944a8957c9' }, h("h1", { key: '688e98a2a7d0ebe657bd9fa720068e826805c39e', class: "post-title" }, this.currentPage || this.arttitle, " ", h("span", { key: 'fe5564506ae2a1b1cf417c375cf0b194c2fed0d9', class: "flipper", onClick: () => this.flip = !this.flip }, fIcon))), h("section", { key: '30ec08e3c769ccb99f84eda21fddf331396c398d', id: "tabs" }, h("button", { key: 'ba1f26d49770748687e414cb4fa9b237e7569bd7', class: !this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "lesson") }, "Lesson"), h("button", { key: 'ab6997d0f33ec3d571dafcbe5ab4b803d68f7ba5', class: this.showNav ? "active" : "", onClick: this.onContentChange.bind(this, "nav") }, "Navigation")), h("main", { key: '5c4fabf0b7cc05b2a4ddd9d79d0eb85e7ed1a5f7' }, mainContent))
         ];
     }
     static get is() { return "wxcc-guide-panel"; }
@@ -151,6 +153,23 @@ export class SideDrawer {
                     "text": ""
                 },
                 "attribute": "opened",
+                "reflect": true
+            },
+            "flip": {
+                "type": "boolean",
+                "mutable": true,
+                "complexType": {
+                    "original": "boolean",
+                    "resolved": "boolean",
+                    "references": {}
+                },
+                "required": false,
+                "optional": false,
+                "docs": {
+                    "tags": [],
+                    "text": ""
+                },
+                "attribute": "flip",
                 "reflect": true
             },
             "lList": {

@@ -12,23 +12,54 @@ aside {
     z-index: 2;
     overflow: scroll;
     
+}
 
 
+:host([flip]) aside {
+    position: fixed;
+    bottom: 0;
+    left: -100%;
+    width: 40rem;
+    max-width: 34%;
+    height: 92vh;
+    background: #d6c5c5;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.27);
+    transition: left 1.3s ease-out;
+    z-index: 2;
+    overflow: scroll;
+    
 }
 
 :host([opened]) aside {
     right: 0;
 
 }
+:host([opened][flip]) aside {
 
+  left:0;
+    /* right: 67% */
+
+}
+main slot{
+    margin: 1rem;
+}
+
+.flipper{
+   float : right;
+}
+.post-header{
+    display: none;
+    /* position: fixed; */
+}
 header {
-    display: flex;
+    display: block;
     padding: 1rem;
     /* background: black; */
     background: #2196F3;
     position: fixed;
     top: 8%;
-    width: 100%;
+    /* width: 100%; */
+    width: 31.75%;
 
 }
 
@@ -160,3 +191,16 @@ li.nav:active {
     background: #2196F3;
     color: white;
 }
+
+svg{
+    fill:#c0c0c0;
+    height:20px;
+    width:80px;
+}
+svg:hover{
+    fill: #f0efef;
+    /* fill: #f7f7f7 */
+}
+
+/* for gql lessons */
+.btn{border-radius:30px;padding:5px 10px; border:1px #2196F3}.btn:hover{background: #2196F3;color:white;}table td,table th{border:1px solid #404040;}table{border-collapse: collapse;}
